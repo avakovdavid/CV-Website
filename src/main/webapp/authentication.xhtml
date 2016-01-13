@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
+     xmlns:p="http://primefaces.org/ui">  
+
+<h:head>
+    <f:event listener="#{loginMBean.checkLoggedOut}" type="preRenderView" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>CVPicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- CSS
+    ================================================== -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="css/prettyPhoto.css" />
+    <link rel="stylesheet" href="css/flexslider.css" />
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<link rel="stylesheet" href="css/style-ie.css"/>
+    <![endif]--> 
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png"/>
+
+    <!-- JS
+    ================================================== -->
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.flexslider.js"></script>
+    <script src="js/jquery.custom.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+	$("#btn-blog-next").click(function () {
+	  $('#blogCarousel').carousel('next')
+	});
+	 $("#btn-blog-prev").click(function () {
+	  $('#blogCarousel').carousel('prev')
+	});
+
+	 $("#btn-client-next").click(function () {
+	  $('#clientCarousel').carousel('next')
+	});
+	 $("#btn-client-prev").click(function () {
+	  $('#clientCarousel').carousel('prev')
+	});
+
+    });
+
+     $(window).load(function(){
+
+	$('.flexslider').flexslider({
+	    animation: "slide",
+	    slideshow: true,
+	    start: function(slider){
+	      $('body').removeClass('loading');
+	    }
+	});  
+    });
+
+    </script>
+</h:head>
+<body class="home">
+    <!-- Color Bars (above header)-->
+    <div class="color-bar-1"></div>
+    <div class="color-bar-2 color-bg"></div>
+    
+    <div class="container">
+    
+      <div class="row header"><!-- Begin Header -->
+      
+        <!-- Logo
+        ================================================== -->
+        <div class="span5 logo">
+            <a href="./"><img src="img/logo.png" alt="" /></a>
+        </div>
+        
+      </div><!-- End Header -->
+    
+
+    <div class="row headline"><!-- Begin Headline -->
+
+
+
+    </div><!-- End Headline -->
+
+    <div class="row headline"><!-- Begin Headline -->
+    
+        <div class="span12" style="text-align:center;">
+	    <div class="row">
+		<div class="span3"></div>
+		<div class="span6">
+		    <h:form id="connexion-form">
+			<h:messages for="connexion-form" globalOnly="false" fatalClass="alert alert-error" errorClass="alert alert-error" warnClass="alert alert-info" infoClass="alert alert-success"/>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-envelope"></i></span>
+			    <p:inputText styleClass="span4" placeholder="Adresse mail" value="#{loginMBean.email}"/>
+			</div>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-lock"></i></span>
+			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{loginMBean.password}"/>
+			</div>
+			<p:commandButton id='submit' styleClass="btn btn-warning" value="Se connecter" action='#{loginMBean.login()}' ajax='false'/>
+		    </h:form>
+		    <br /><br />
+		    <h:form id="registration-form">
+			<h:messages for="registration-form" globalOnly="false" fatalClass="alert alert-error" errorClass="alert alert-error" warnClass="alert alert-info" infoClass="alert alert-success"/>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-user"></i></span>
+			    <p:inputText styleClass="span4" placeholder="Nom" value="#{userMBean.firstName}"/>
+			</div>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-user"></i></span>
+			    <p:inputText styleClass="span4" placeholder="Prénom" value="#{userMBean.lastName}"/>
+			</div>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-envelope"></i></span>
+			    <p:inputText styleClass="span4" placeholder="Adresse mail" value="#{userMBean.email}"/>
+			</div>
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-lock"></i></span>
+			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{userMBean.password}"/>
+			</div> 
+			<div class="input-prepend">
+			    <span class="add-on"><i class="icon-lock"></i></span>
+			    <p:password styleClass="span4" placeholder="Mot de passe de vérification" value="#{userMBean.passwordRepeat}"/>
+			</div> 
+			<p:commandButton id='submit' styleClass="btn btn-success" value="S'inscrire" action='#{userMBean.save}' ajax='false'/>
+		    </h:form> 
+		</div>
+		<div class="span3"></div>
+	    </div>     
+        </div>
+    </div><!-- End Headline -->
+    
+    </div> <!-- End Container -->
+
+    <!-- Footer Area
+        ================================================== -->
+
+    <div class="footer-container"><!-- Begin Footer -->
+        <div class="container">
+            <div class="row"></div>
+
+            <div class="row"><!-- Begin Sub Footer -->
+                <div class="span12 footer-col footer-sub">
+                    <div class="row no-margin">
+                        <div class="span6"><span class="left">Copyright 2015-2016 CVPicker. All rights reserved.</span></div>
+                        <div class="span6"></div>
+                    </div>
+                </div>
+            </div><!-- End Sub Footer -->
+
+        </div>
+    </div><!-- End Footer --> 
+    
+    <!-- Scroll to Top -->  
+    <div id="toTop" class="hidden-phone hidden-tablet">Remonter</div>
+    
+</body>
+</html>
