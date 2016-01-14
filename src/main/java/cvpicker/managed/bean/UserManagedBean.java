@@ -27,6 +27,8 @@ public class UserManagedBean implements Serializable {
     private String email;
     private String password;
     private String passwordRepeat;
+    
+    private LoginManagedBean loginBean;
 
     /**
      * Add User
@@ -36,8 +38,14 @@ public class UserManagedBean implements Serializable {
     public void save() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
-	
+		
 	try {
+	    User testUser = (User) session.createCriteria(User.class).add(Restrictions.eq("email", email)).uniqueResult();
+	    if(testUser != null){
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "L'utilisateur avec l'adresse '"+email+"' existe déjà"));
+		return ;
+	    }
+	    
 	    User user = new User();
 	    user.setId(getId());
 	    user.setFirstName(getFirstName());
@@ -45,7 +53,7 @@ public class UserManagedBean implements Serializable {
 	    user.setEmail(getEmail());
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
-		FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", "Les deux mot de passes doivent être identiques"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Les deux mot de passes doivent être identiques"));
 		return ;
 	    }
 	    
@@ -59,10 +67,11 @@ public class UserManagedBean implements Serializable {
 	    session.save(user);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a bien été créé.", "Votre profil a bien été créé."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Succès", "Votre profil a bien été créé."));
 	    
+	    loginBean.setCurrentUser(user);	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement."));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -177,5 +186,19 @@ public class UserManagedBean implements Serializable {
 
     public void setPasswordRepeat(String passwordRepeat) {
 	this.passwordRepeat = passwordRepeat;
+    }
+
+    /**
+     * @return the loginBean
+     */
+    public LoginManagedBean getLoginBean() {
+	return loginBean;
+    }
+
+    /**
+     * @param loginBean the loginBean to set
+     */
+    public void setLoginBean(LoginManagedBean loginBean) {
+	this.loginBean = loginBean;
     }
 }
