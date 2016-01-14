@@ -52,8 +52,8 @@
 				    <li class="#{view.viewId eq '/messenger-new.xhtml' ? 'active' : ''}"><a href="messenger-new.xhtml">Nouveau message</a></li>
 				</ul>
 			    </li>
-			    <li>
-				<a href="friends.htm">Mes amis</a>
+			    <li class="#{view.viewId eq '/friends.xhtml' ? 'active' : ''}">
+				<a href="friends.xhtml">Mes amis</a>
 			    </li>
 			    <li class="#{view.viewId eq '/settings.xhtml' ? 'active' : ''}"><a href="settings.xhtml">Options</a></li>
 			    <li><h:form style="margin:50% 0;"><h:commandLink action="#{loginMBean.logout}" title="Se déconnecter"><i class="icon-off"></i></h:commandLink></h:form></li>
