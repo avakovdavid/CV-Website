@@ -2,7 +2,8 @@
 <html xmlns='http://www.w3.org/1999/xhtml'
      xmlns:h='http://java.sun.com/jsf/html'
      xmlns:f='http://java.sun.com/jsf/core'
-     xmlns:p="http://primefaces.org/ui">  
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">  
 
 <h:head>
     <f:event listener="#{loginMBean.checkLoggedOut}" type="preRenderView" />
@@ -71,6 +72,11 @@
     </script>
 </h:head>
 <body class="home">
+    
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
+    
     <!-- Color Bars (above header)-->
     <div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
@@ -100,40 +106,51 @@
 	    <div class="row">
 		<div class="span3"></div>
 		<div class="span6">
-		    <h:form id="connexion-form"><p:growl id="msgs" showDetail="true"/>
+		    
+		    <h:form id="connexion-form">
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-envelope"></i></span>
-			    <p:inputText styleClass="span4" placeholder="Adresse mail" value="#{loginMBean.email}"/>
+			    <p:inputText styleClass="span4" placeholder="Adresse mail" value="#{loginMBean.email}" required="true" requiredMessage="Veuillez saisir l'adresse mail" validatorMessage="Adresse mail incorrecte.">
+				<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			    </p:inputText>
 			</div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-lock"></i></span>
-			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{loginMBean.password}"/>
+			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{loginMBean.password}" required="true" requiredMessage="Veuillez saisir le mot de passe"/>
 			</div>
-			<p:commandButton update="connexion-form" styleClass="btn btn-warning" value="Se connecter" actionListener='#{loginMBean.login()}'/>
+			<p:commandButton styleClass="btn btn-warning" value="Se connecter" actionListener='#{loginMBean.login()}'/>
 		    </h:form>
 		    <br /><br />
 		    <h:form id="registration-form">
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-user"></i></span>
-			    <p:inputText styleClass="span4" placeholder="Nom" value="#{userMBean.firstName}"/>
+			    <p:inputText styleClass="span4" placeholder="Nom" value="#{userMBean.firstName}" required="true" requiredMessage="Veuillez saisir votre nom" validatorMessage="La taille du nom doit être entre 2 et 255 caractères.">
+				<f:validateLength minimum="2" maximum="255"/>
+			    </p:inputText>
 			</div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-user"></i></span>
-			    <p:inputText styleClass="span4" placeholder="Prénom" value="#{userMBean.lastName}"/>
+			    <p:inputText styleClass="span4" placeholder="Prénom" value="#{userMBean.lastName}" required="true" requiredMessage="Veuillez saisir votre prénom" validatorMessage="La taille du prénom doit être entre 2 et 255 caractères.">
+				<f:validateLength minimum="2" maximum="255"/>
+			    </p:inputText>
 			</div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-envelope"></i></span>
-			    <p:inputText styleClass="span4" placeholder="Adresse mail" value="#{userMBean.email}"/>
+			    <p:inputText type="email" styleClass="span4" placeholder="Adresse mail" value="#{userMBean.email}" required="true" requiredMessage="Veuillez saisir l'adresse mail" validatorMessage="Adresse mail incorrecte.">
+				<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			    </p:inputText>
 			</div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-lock"></i></span>
-			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{userMBean.password}"/>
+			    <p:password styleClass="span4" placeholder="Mot de passe" value="#{userMBean.password}" required="true" requiredMessage="Veuillez saisir le mot de passe" validatorMessage="La taille du mot de passe doit être entre 5 et 255 caractères.">
+				<f:validateLength minimum="5" maximum="255"/>
+			    </p:password>
 			</div> 
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-lock"></i></span>
-			    <p:password styleClass="span4" placeholder="Mot de passe de vérification" value="#{userMBean.passwordRepeat}"/>
+			    <p:password styleClass="span4" placeholder="Mot de passe de vérification" value="#{userMBean.passwordRepeat}" required="true" requiredMessage="Veuillez confirmer le mot de passe"/>
 			</div> 
-			<p:commandButton styleClass="btn btn-success" value="S'inscrire" action='#{userMBean.save}' ajax='false'/>
+			<p:commandButton styleClass="btn btn-success" value="S'inscrire" actionListener='#{userMBean.save}'/>
 		    </h:form> 
 		</div>
 		<div class="span3"></div>

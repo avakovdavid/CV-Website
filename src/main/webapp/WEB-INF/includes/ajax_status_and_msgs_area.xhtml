@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    
+    <body>
+	<ui:composition>
+	    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="ajax-loader.gif" library="img"/>
+	    </p:dialog>
+	    <p:growl autoUpdate="true" id="msgs" showDetail="false" sticky="true"/>
+	</ui:composition>
+    </body>
+</html>
