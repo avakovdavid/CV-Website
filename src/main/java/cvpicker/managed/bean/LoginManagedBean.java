@@ -46,6 +46,13 @@ public class LoginManagedBean implements Serializable {
 	return currentUser;
     }
     
+    /**
+     * @param currentUser the currentUser to set
+     */
+    public void setCurrentUser(User currentUser) {
+	this.currentUser = currentUser;
+    }
+    
     public void login(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -61,19 +68,18 @@ public class LoginManagedBean implements Serializable {
 	}
 	
 	if(user == null){
-	    FacesContext.getCurrentInstance().addMessage("connexion-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utilisateur avec l'adresse '" + email + "' n'existe pas.", "Utilisateur avec l'adresse '" + email + "' n'existe pas."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Utilisateur avec l'adresse '" + email + "' n'existe pas."));
 	} else if (!user.getPassword().equals(password)){
-	    FacesContext.getCurrentInstance().addMessage("connexion-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utilisateur avec l'adresse '" + email + "' n'existe pas.", "Utilisateur avec l'adresse '" + email + "' n'existe pas."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Mot de passe incorrect."));
 	} else {
-	    Hibernate.initialize(user);
-	    currentUser = user;
+	    setCurrentUser(user);
 	}
 	
 	session.close();
     }
      
     public String logout() {
-         currentUser = null;
+         setCurrentUser(null);
          email = "";
          password = "";
           

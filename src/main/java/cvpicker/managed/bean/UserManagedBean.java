@@ -27,6 +27,8 @@ public class UserManagedBean implements Serializable {
     private String email;
     private String password;
     private String passwordRepeat;
+    
+    private LoginManagedBean loginBean;
 
     /**
      * Add User
@@ -45,7 +47,7 @@ public class UserManagedBean implements Serializable {
 	    user.setEmail(getEmail());
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
-		FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", "Les deux mot de passes doivent être identiques"));
+		FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Les deux mot de passes doivent être identiques"));
 		return ;
 	    }
 	    
@@ -61,8 +63,9 @@ public class UserManagedBean implements Serializable {
 	    
 	    FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a bien été créé.", "Votre profil a bien été créé."));
 	    
+	    loginBean.setCurrentUser(user);	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement."));
+	    FacesContext.getCurrentInstance().addMessage("registration-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement."));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -177,5 +180,19 @@ public class UserManagedBean implements Serializable {
 
     public void setPasswordRepeat(String passwordRepeat) {
 	this.passwordRepeat = passwordRepeat;
+    }
+
+    /**
+     * @return the loginBean
+     */
+    public LoginManagedBean getLoginBean() {
+	return loginBean;
+    }
+
+    /**
+     * @param loginBean the loginBean to set
+     */
+    public void setLoginBean(LoginManagedBean loginBean) {
+	this.loginBean = loginBean;
     }
 }

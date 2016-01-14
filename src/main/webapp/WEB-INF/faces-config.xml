@@ -10,6 +10,10 @@
 	<managed-bean-name>userMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.UserManagedBean</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
     </managed-bean>
     <managed-bean>
 	<managed-bean-name>loginMBean</managed-bean-name>
