@@ -38,6 +38,9 @@
     <script src="js/jquery.prettyPhoto.js"></script>
 </h:head>
 <h:body>
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
     <div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
     
@@ -54,7 +57,7 @@
                     <h:form id="inboxForm">
 			<p:dataList id="dataToUpdate" value="#{messageMBean.receivedList()}" var="message" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
 				    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				    rowsPerPageTemplate="5,10,15">
+				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Boite de réception vide.">
 			    
 			    <c:set var="userFrom" value="#{message.getFromU()}" />
 			    <img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{message.getFromU().firstName} #{message.getFromU().lastName}"/>
