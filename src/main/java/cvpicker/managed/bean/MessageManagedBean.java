@@ -265,12 +265,12 @@ public class MessageManagedBean implements Serializable{
 	criteria.add(Restrictions.eq("id", id));
 	Message msg = (Message)criteria.uniqueResult();
 	
-	if(msg == null){System.out.println("message introuvable");
+	if(msg == null){
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Message introuvable", ""));
 	    return ;
 	}
 
-	if(msg.getFromU().equals(loginBean.getCurrentUser())){System.out.println("test");
+	if(msg.getFromU().equals(loginBean.getCurrentUser())){
 	    msg.setDeletedByFromU(true);
 	}else{
 	    msg.setDeletedByToU(true);
