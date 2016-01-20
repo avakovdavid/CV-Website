@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userB")
+    private List<Friend> friendList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userA")
+    private List<Friend> friendList1;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -183,6 +187,24 @@ public class User implements Serializable {
     @Override
     public String toString() {
 	return "cvpicker.hibernate.User[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<Friend> getFriendList() {
+	return friendList;
+    }
+
+    public void setFriendList(List<Friend> friendList) {
+	this.friendList = friendList;
+    }
+
+    @XmlTransient
+    public List<Friend> getFriendList1() {
+	return friendList1;
+    }
+
+    public void setFriendList1(List<Friend> friendList1) {
+	this.friendList1 = friendList1;
     }
     
 }

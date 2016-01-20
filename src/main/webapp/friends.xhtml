@@ -41,6 +41,11 @@
     <script src="js/jquery.custom.js"></script>
 </h:head>
 <body>
+    
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
+    
     <!-- Color Bars (above header)-->
     <div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
@@ -52,59 +57,50 @@
 	</ui:insert>
 
 	<h2>Demandes d'ajout</h2>
-        <div class="row"> 
+	<div class="row"> 
             <div class="span12 gallery">
-                <div class="row clearfix">
-                    <ul class="gallery-post-grid holder">
+		<div class="row clearfix ">
+		    <h:form id="friendRequests" styleClass="removeBackground">
+			<p:dataList itemStyleClass="span3 gallery-item" value="#{friendMBean.getRequestList()}" var="friend" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated "
+			    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Pas de nouvelles demandes">
 
-                        <li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
                             <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
                                 <span class="gallery-icons">
-									<a href="friends.htm" class="item-accepte-link" title="Accepter"></a>
+				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests"></p:commandLink>
                                     <a href="cv-full-width.htm" class="item-details-link" title="Voir le CV"></a>
-									<a href="friends.htm" class="item-reject-link" title="Rejeter"></a>
+				    <p:commandLink styleClass="item-reject-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendRequests"></p:commandLink>
                                 </span>
                             </span>
-                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/></a>
-                        </li>
-		    </ul>
+                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/>#{friend.firstName.concat(" ").concat(friend.lastName)}</a>
+			    
+			</p:dataList>
+		    </h:form>
                 </div>
             </div><!-- End gallery list-->
         </div>
-		
-		
-        <h2>Mes amis</h2>
-        <div class="row"> 
+	
+	<h2>Mes amis</h2>
+	<div class="row"> 
             <div class="span12 gallery">
-                <div class="row clearfix">
-                    <ul class="gallery-post-grid holder">
-
-                        <li  class="span3 gallery-item" data-id="id-1" data-type="illustration">
+		<div class="row clearfix ">
+		    <h:form id="friendsList" styleClass="removeBackground">
+			<p:dataList itemStyleClass="span3 gallery-item" value="#{friendMBean.getList()}" var="friend" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
+			    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Vous n'avez pas d'amis">
+			    
                             <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
                                 <span class="gallery-icons">
                                     <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Voir la photo" data-rel="prettyPhoto"></a>
                                     <a href="cv-full-width.htm" class="item-details-link" title="Voir le CV"></a>
-									<a href="friends.htm" class="item-remove-link" title="Supprimer de la liste d'amis"></a>
+				    <p:commandLink styleClass="item-remove-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendsList"></p:commandLink>
                                 </span>
                             </span>
-                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/></a>
-                        </li>
-                        
-                    </ul>
+                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/>#{friend.firstName.concat(" ").concat(friend.lastName)}</a>
+			    
+			</p:dataList>
+		    </h:form>
                 </div>
-
-                <!-- Pagination -->
-                <div class="pagination">
-                    <ul>
-                    <li class="active"><a href="#">Prev</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
-
             </div><!-- End gallery list-->
         </div>
     </div> <!-- End Container -->

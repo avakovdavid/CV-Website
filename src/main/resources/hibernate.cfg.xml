@@ -16,5 +16,6 @@
     <property name="hibernate.archive.autodetection">class, hbm</property>
     <mapping class="cvpicker.hibernate.User"/>
     <mapping class="cvpicker.hibernate.Message"/>
+    <mapping class="cvpicker.hibernate.Friend"/>
   </session-factory>
 </hibernate-configuration>

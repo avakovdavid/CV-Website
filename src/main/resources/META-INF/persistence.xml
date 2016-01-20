@@ -5,6 +5,7 @@
     <jta-data-source>ok</jta-data-source>
     <class>cvpicker.hibernate.Message</class>
     <class>cvpicker.hibernate.User</class>
+    <class>cvpicker.hibernate.Friend</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
