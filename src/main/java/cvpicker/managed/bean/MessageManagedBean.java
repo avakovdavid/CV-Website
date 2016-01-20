@@ -13,7 +13,6 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
@@ -76,17 +75,11 @@ public class MessageManagedBean implements Serializable{
 	    session.save(msg);
 	    tx.commit();
 	    
-	    setMessage("Votre message a bien été envoyé.");
-	    setTypeMessage("success");
-	    
-	    // Add View Faces Message
-	    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, getMessage(), getMessage());
-	    // The component id is null, so this message is considered as a view message
-	    FacesContext.getCurrentInstance().addMessage(null, m);
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien été envoyé.", ""));
+
 	    reset();
 	} catch (Exception e) {
-	    setMessage("Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.");
-	    setTypeMessage("error");
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
 	    if (tx != null) {
 		tx.rollback();
 	    }
@@ -104,12 +97,6 @@ public class MessageManagedBean implements Serializable{
 	criteria.add(Restrictions.eq("deletedByToU", false));
 	criteria.addOrder(Order.desc("dateCreation"));
 	List<Message>  msgList = criteria.list();
-	
-	/*Session session = HibernateUtil.getSessionFactory().openSession();
-	User u = (User)session.load(User.class, getLoginBean().getCurrentUser().getId());	
-	List<Message>  msgList=getLoginBean().getCurrentUser().getMessageList();
-	session.close();*/
-	
 	return msgList;	
     }
     
@@ -206,34 +193,6 @@ public class MessageManagedBean implements Serializable{
     }
 
     /**
-     * @return the message
-     */
-    public String getMessage() {
-	return message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-	this.message = message;
-    }
-
-    /**
-     * @return the typeMessage
-     */
-    public String getTypeMessage() {
-	return typeMessage;
-    }
-
-    /**
-     * @param typeMessage the typeMessage to set
-     */
-    public void setTypeMessage(String typeMessage) {
-	this.typeMessage = typeMessage;
-    }
-
-    /**
      * @return the loginBean
      */
     public LoginManagedBean getLoginBean() {
@@ -286,9 +245,9 @@ public class MessageManagedBean implements Serializable{
 
 	    setNewMsgCounter(result);
 	} catch(Exception e){
-	    System.out.println(e.getMessage());
+
 	} finally{
-	session.close();
+	    session.close();
 	}
 	return result;
     }
@@ -306,12 +265,12 @@ public class MessageManagedBean implements Serializable{
 	criteria.add(Restrictions.eq("id", id));
 	Message msg = (Message)criteria.uniqueResult();
 	
-	if(msg == null){System.out.println("message introuvable");
-	    FacesContext.getCurrentInstance().addMessage("delete-"+id+"-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Message introuvable.", "Message introuvable."));
+	if(msg == null){
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Message introuvable", ""));
 	    return ;
 	}
 
-	if(msg.getFromU() == loginBean.getCurrentUser()){
+	if(msg.getFromU().equals(loginBean.getCurrentUser())){
 	    msg.setDeletedByFromU(true);
 	}else{
 	    msg.setDeletedByToU(true);
@@ -325,14 +284,13 @@ public class MessageManagedBean implements Serializable{
 		session.delete(msg);
 	    }else{
 		session.saveOrUpdate(msg);
-		System.out.println("update ..");
 	    }
 	    
 	    tx.commit();
-	    FacesContext.getCurrentInstance().addMessage("delete-"+id+"-form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien été supprimé.", "Votre message a bien été supprimé."));
+	    
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien été supprimé.", ""));
 	} catch (Exception e) {
-	    System.out.println("erreur : " + e);
-	    FacesContext.getCurrentInstance().addMessage("delete-"+id+"-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. Le message n'a pas pu être supprimé.", "Une erreur s'est produite. Le message n'a pas pu être supprimé."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. Le message n'a pas pu être supprimé.", ""));
 	    if (tx != null) {
 		tx.rollback();
 	    }

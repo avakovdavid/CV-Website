@@ -42,7 +42,7 @@ public class UserManagedBean implements Serializable {
 	try {
 	    User testUser = (User) session.createCriteria(User.class).add(Restrictions.eq("email", email)).uniqueResult();
 	    if(testUser != null){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "L'utilisateur avec l'adresse '"+email+"' existe déjà"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "L'utilisateur avec l'adresse '"+email+"' existe déjà", ""));
 		return ;
 	    }
 	    
@@ -53,7 +53,7 @@ public class UserManagedBean implements Serializable {
 	    user.setEmail(getEmail());
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Les deux mot de passes doivent être identiques"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", ""));
 		return ;
 	    }
 	    
@@ -67,11 +67,11 @@ public class UserManagedBean implements Serializable {
 	    session.save(user);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Succès", "Votre profil a bien été créé."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a bien été créé.", ""));
 	    
 	    loginBean.setCurrentUser(user);	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement."));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
