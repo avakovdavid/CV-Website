@@ -65,4 +65,13 @@
 	    <value>#{userMBean}</value>
 	</managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>cvMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.CvManagedBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+    </managed-bean>
 </faces-config>

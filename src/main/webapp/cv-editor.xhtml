@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">  
+
+<h:head>
+    <f:event listener="#{loginMBean.checkLoggedIn}" type="preRenderView" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Editer mon CV - CVPicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- CSS
+    ================================================== -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<link rel="stylesheet" href="css/style-ie.css"/>
+    <![endif]--> 
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png"/>
+
+    <!-- JS
+    ================================================== -->
+    <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+</h:head>
+<h:body>
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
+    <div class="color-bar-1"></div>
+    <div class="color-bar-2 color-bg"></div>
+    
+    <div class="container main-container">
+	
+	<ui:insert name="header" >
+	    <ui:include src="/WEB-INF/includes/header.xhtml" />
+	</ui:insert>
+	
+	
+        <h2>Editer mon CV</h2>
+        <div class="row">
+            <div class="span8 contact">
+		<h:form id="cv-form">
+		    
+		    <h:outputLabel for="title" value="Titre :" />
+		    <p:inputText id="title" required="true" value="#{cvMBean.title}"/>
+		    
+		    <h:outputLabel for="description" value="Description :" />
+		    <p:inputTextarea counter="displayCounter" counterTemplate="{0} caractères disponibles." id="description" required="true" maxlength="255" value="#{cvMBean.description}"/>
+		    <h:outputText id="displayCounter" />
+		    
+		    
+		    <div class="row">
+                        <div class="span2">
+			    <p:commandButton id='submit' styleClass="btn btn-success" value="Mettre à jour" action='#{cvMBean.update}' ajax='true' update="cv-form"/>
+                        </div>
+                    </div>
+		</h:form>
+            </div>
+
+            <ui:insert name="sidebar" >
+		<ui:include src="/WEB-INF/includes/right-sidebar.xhtml" />
+	    </ui:insert>
+        </div>
+    </div> <!-- End Container -->
+
+    <ui:insert name="footer" >
+	<ui:include src="/WEB-INF/includes/footer.xhtml" />
+    </ui:insert>
+    
+</h:body>
+</html>
