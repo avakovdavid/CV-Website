@@ -35,8 +35,6 @@ public class MessageManagedBean implements Serializable{
     private String content;
     private User fromU;
     private User toU;
-    private String message;
-    private String typeMessage;
     
     private long newMsgCounter;
     private Message selectedMsg;
