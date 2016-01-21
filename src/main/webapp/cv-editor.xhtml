@@ -56,10 +56,10 @@
 		<h:form id="cv-form">
 		    
 		    <h:outputLabel for="title" value="Titre :" />
-		    <p:inputText id="title" required="true" value="#{cvMBean.title}"/>
+		    <p:inputText id="title" required="true" requiredMessage="Veuillez saisir la descriptione titre de votre CV." value="#{cvMBean.title}"/>
 		    
 		    <h:outputLabel for="description" value="Description :" />
-		    <p:inputTextarea counter="displayCounter" counterTemplate="{0} caractères disponibles." id="description" required="true" maxlength="255" value="#{cvMBean.description}"/>
+		    <p:inputTextarea counter="displayCounter" counterTemplate="{0} caractères disponibles." id="description" required="true"  requiredMessage="Veuillez saisir la description de votre CV." maxlength="255" value="#{cvMBean.description}"/>
 		    <h:outputText id="displayCounter" />
 		    
 		    
