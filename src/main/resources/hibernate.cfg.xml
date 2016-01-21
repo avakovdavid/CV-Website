@@ -17,5 +17,6 @@
     <mapping class="cvpicker.hibernate.User"/>
     <mapping class="cvpicker.hibernate.Message"/>
     <mapping class="cvpicker.hibernate.Friend"/>
+    <mapping class="cvpicker.hibernate.Cv"/>
   </session-factory>
 </hibernate-configuration>
