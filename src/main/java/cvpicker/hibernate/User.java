@@ -40,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserSkill> userSkillList;
     @JoinColumn(name = "cv", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cv cv;
@@ -217,6 +219,15 @@ public class User implements Serializable {
 
     public void setCv(Cv cv) {
 	this.cv = cv;
+    }
+
+    @XmlTransient
+    public List<UserSkill> getUserSkillList() {
+	return userSkillList;
+    }
+
+    public void setUserSkillList(List<UserSkill> userSkillList) {
+	this.userSkillList = userSkillList;
     }
     
 }

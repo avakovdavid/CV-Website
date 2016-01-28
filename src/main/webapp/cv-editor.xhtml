@@ -3,7 +3,8 @@
      xmlns:h='http://java.sun.com/jsf/html'
      xmlns:f='http://java.sun.com/jsf/core'
      xmlns:p="http://primefaces.org/ui"
-     xmlns:ui="http://java.sun.com/jsf/facelets">  
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">  
 
 <h:head>
     <f:event listener="#{loginMBean.checkLoggedIn}" type="preRenderView" />
@@ -54,13 +55,66 @@
         <div class="row">
             <div class="span8 contact">
 		<h:form id="cv-form">
-		    
+
 		    <h:outputLabel for="title" value="Titre :" />
 		    <p:inputText id="title" required="true" requiredMessage="Veuillez saisir la descriptione titre de votre CV." value="#{cvMBean.title}"/>
 		    
 		    <h:outputLabel for="description" value="Description :" />
 		    <p:inputTextarea counter="displayCounter" counterTemplate="{0} caractères disponibles." id="description" required="true"  requiredMessage="Veuillez saisir la description de votre CV." maxlength="255" value="#{cvMBean.description}"/>
-		    <h:outputText id="displayCounter" />
+		    <br/><h:outputText id="displayCounter" /><br/><br/>
+		    
+		    
+		    
+		    <!-- START SKILLS AREA -->
+		    <p:dataTable id="skills" var="skill" value="#{userSkillMBean.skills}" draggableRows="true">
+			<p:ajax event="rowReorder" listener="#{userSkillMBean.swapSkills}" update="skills msgs" />
+			
+			<p:column headerText="Compétence">
+			    <h:outputText value="#{skill.skill.name}" />
+			</p:column>
+			
+			<p:column headerText="Description">
+			    <h:outputText value="#{skill.description}" />
+			</p:column>
+			
+			<p:column headerText="Niveau">
+			    <h:outputText value="#{skill.mark}%" />
+			</p:column>
+			
+			<p:column headerText="Action" style="width:110px;">
+			    <p:commandLink value="Supprimer" action='#{userSkillMBean.removeSkill(skill)}' ajax='true' update="skills">
+				<f:attribute name="skill" value="#{skill}"/>
+			    </p:commandLink>
+			</p:column>
+			
+		    </p:dataTable>
+		    <p:commandLink oncomplete="PF('newSkillDialog').show()" >
+			<i class="icon-plus"></i>ajouter une compétence
+		    </p:commandLink><br/><br/>
+		    
+		    <p:dialog header="Nouvelle compétence" widgetVar="newSkillDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+			<p:outputPanel id="msgDetail">
+			    <h:outputLabel for="skillName" value="Nom :" />
+			    <p:inputText id="skillName" value="#{userSkillMBean.skillName}"/><br/>
+			    
+			    <h:outputLabel for="skillDesc" value="Description :" />
+			    <p:inputTextarea id="skillDesc" value="#{userSkillMBean.skillDescription}"/><br/>
+			    
+			    <h:outputLabel for="skillMark" value="Pourcentage de maîtrise :" />
+			    <p:spinner stepFactor="5" id="skillMark" value="#{userSkillMBean.skillMark}" min="0" max="100" suffix="%"/><br/>
+			    
+			    <p:commandButton id="addSkillButton" value="Ajouter" action='#{userSkillMBean.addSkill}' ajax='true' update="skills"/>
+			</p:outputPanel>
+		    </p:dialog>
+		    <!-- END SKILLS AREA -->
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
 		    
 		    
 		    <div class="row">
