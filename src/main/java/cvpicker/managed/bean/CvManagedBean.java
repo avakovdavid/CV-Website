@@ -5,16 +5,13 @@
 package cvpicker.managed.bean;
 
 import cvpicker.hibernate.Cv;
-import cvpicker.hibernate.Friend;
 import cvpicker.hibernate.HibernateUtil;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -36,8 +33,6 @@ public class CvManagedBean implements Serializable{
     
     public void update(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
-	
-	
 	
 	Cv cv = loginBean.getCurrentUser().getCv();
 	
@@ -106,7 +101,4 @@ public class CvManagedBean implements Serializable{
     public void setLoginBean(LoginManagedBean loginBean) {
 	this.loginBean = loginBean;
     }
-    
-    
-    
 }
