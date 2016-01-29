@@ -66,14 +66,14 @@
 		    
 		    
 		    <!-- START SKILLS AREA -->
-		    <p:dataTable id="skills" var="skill" value="#{userSkillMBean.skills}" draggableRows="true">
+		    <p:dataTable id="skills" var="skill" value="#{userSkillMBean.skills}" draggableRows="true" emptyMessage="Aucune compétence à afficher." resizableColumns="true" >
 			<p:ajax event="rowReorder" listener="#{userSkillMBean.swapSkills}" update="skills msgs" />
 			
 			<p:column headerText="Compétence">
 			    <h:outputText value="#{skill.skill.name}" />
 			</p:column>
 			
-			<p:column headerText="Description">
+			<p:column headerText="Description" styleClass="wrap">
 			    <h:outputText value="#{skill.description}" />
 			</p:column>
 			
