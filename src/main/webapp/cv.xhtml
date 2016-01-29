@@ -88,9 +88,18 @@
             </div>
         </div>
 	
-	
-	
-	
+	<h3 class="title-bg">Compétences</h3>
+        <div class="row"> 
+	    <h:form id="cvSkills" styleClass="removeBackground">
+		<p:dataList id="skills" var="skill" itemStyleClass="span2" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher.">
+		    <h6>#{skill.skill.name}</h6>
+		    <p>#{skill.description}</p>
+		    <div class="progress progress-#{skill.mark le 25 ? 'danger' : skill.mark le 50 ? 'warning' : skill.mark le 75 ? 'info' : skill.mark le 100 ? 'success' : ''} progress-striped">
+			<div class="bar" style="width: #{''.concat(skill.mark).concat('%')};">#{skill.mark}%</div>
+		    </div>
+		</p:dataList>
+	    </h:form>
+        </div>
     </div> <!-- End Container -->
 
     <ui:insert name="footer" >

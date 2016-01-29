@@ -810,6 +810,10 @@ a.accordion-toggle{background: #f5f5f5;}
     border:none;
 }
 
+.removeBackground ul{
+    list-style: none;
+}
+
 .preformatted {
     white-space: pre-wrap;
 }

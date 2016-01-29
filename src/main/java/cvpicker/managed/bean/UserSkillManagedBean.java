@@ -7,9 +7,11 @@ package cvpicker.managed.bean;
 import cvpicker.hibernate.Friend;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Skill;
+import cvpicker.hibernate.User;
 import cvpicker.hibernate.UserSkill;
 import cvpicker.hibernate.UserSkillPK;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -49,6 +51,22 @@ public class UserSkillManagedBean implements Serializable{
 	
 	setSkills(criteria.list());	
 	session.close();
+    }
+    
+    public List<UserSkill> getUserSkillsByUser(User u){
+	List<UserSkill> result = new ArrayList<UserSkill>();
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	
+	Criteria criteria = session.createCriteria(UserSkill.class);
+	criteria.add(Restrictions.eq("user", u));
+	criteria.addOrder(Order.asc("position"));	
+	
+	result = criteria.list();
+	
+	session.close();
+	System.out.println(u.getId());
+	return result; 
     }
     
     public void addSkill(){
