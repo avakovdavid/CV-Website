@@ -33,6 +33,18 @@
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
 	</managed-property>
+	<managed-property>
+	    <property-name>subject</property-name>
+	    <value>#{param.subject}</value>
+	</managed-property>
+	<managed-property>
+	    <property-name>toU</property-name>
+	    <value>#{userMBean.getUserById(param.user)}</value>
+	</managed-property>
+	<managed-property>
+	    <property-name>content</property-name>
+	    <value>#{param.content}</value>
+	</managed-property>
     </managed-bean>
     <managed-bean>
 	<managed-bean-name>userConverter</managed-bean-name>

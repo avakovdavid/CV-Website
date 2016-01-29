@@ -64,15 +64,61 @@ public class FriendManagedBean  implements Serializable{
 	}
     }
     
-    public void sendRequest(int id){
+    public boolean alreadyFriendWith(User u){
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	User userA = getLoginBean().getCurrentUser();
+	
+	Criteria criteria = session.createCriteria(Friend.class);
+	criteria.add(Restrictions.or(
+		Restrictions.eq("userA", userA),
+		Restrictions.eq("userB", userA)));
+	criteria.add(Restrictions.or(
+		Restrictions.eq("userA", u),
+		Restrictions.eq("userB", u)));
+	
+	Friend friend = (Friend)criteria.uniqueResult();
+	
+	return friend != null;
+    }
+    
+    public void sendRequest(){
+	int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
+	
 	User userA = getLoginBean().getCurrentUser();
 	User userB = getUserBean().getUserById(id);
-	
+
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
 		
 	try {	
-	    Friend friend = new Friend();
+	    if(userA.equals(userB)){
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vous ne pouvez pas vous ajouter vous-mêmes.", ""));
+		return ;
+	    }
+	    
+	    Criteria criteria = session.createCriteria(Friend.class);
+	    criteria.add(Restrictions.or(
+		    Restrictions.eq("userA", userA),
+		    Restrictions.eq("userB", userA)));
+	    criteria.add(Restrictions.or(
+		    Restrictions.eq("userA", userB),
+		    Restrictions.eq("userB", userB)));
+
+	    Friend friend = (Friend)criteria.uniqueResult();
+	    
+	    if(friend != null) {
+		if(friend.getUserA().equals(userA) && !friend.getAccepted()){
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La demande a déjà été envoyée mais n'a pas encore été acceptée.", ""));
+		} else if(friend.getUserA().equals(userB) && !friend.getAccepted()){
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Répondez à la demande d'ajout.", ""));
+		} else {
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous êtes déjà amis.", ""));
+		}
+		
+		return ;
+	    }
+	    
+	    friend = new Friend();
 	    friend.setUserA(userA);
 	    friend.setUserB(userB);
 	    friend.setAccepted(false);
