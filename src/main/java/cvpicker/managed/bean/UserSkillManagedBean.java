@@ -161,6 +161,12 @@ public class UserSkillManagedBean implements Serializable{
 	int from = event.getFromIndex();
 	int to = event.getToIndex();
 	
+	if(from > to){
+	    int tmp = from;
+	    from = to;
+	    to = tmp;
+	}
+	
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
 	
@@ -175,6 +181,13 @@ public class UserSkillManagedBean implements Serializable{
 	    
 	    session.update("position", skillFrom);
 	    session.update("position", skillTo);
+	    
+	    UserSkill s;
+	    for(int i=from+1; i<to; i++){
+		s = skills.get(i);
+		s.setPosition(s.getPosition()+1);
+		session.update("position", s);
+	    }
 	    
 	    tx.commit();	    
 	} catch (Exception e) {
