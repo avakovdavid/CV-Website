@@ -28,7 +28,8 @@
 		<!-- Main Navigation
 		================================================== -->
 		<div class="span7 navigation">
-		    <div class="navbar hidden-phone">            
+		    <div class="navbar hidden-phone">   
+			<h:form id="menu">
 			<ul class="nav">
 			    <li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}">
 				<a href="index.xhtml">Accueil</a>
@@ -52,12 +53,14 @@
 				    <li class="#{view.viewId eq '/messenger-new.xhtml' ? 'active' : ''}"><a href="messenger-new.xhtml">Nouveau message</a></li>
 				</ul>
 			    </li>
+			    <c:set var="friendRequestCounter" value="#{friendMBean.friendRequestsCounter}" />
 			    <li class="#{view.viewId eq '/friends.xhtml' ? 'active' : ''}">
-				<a href="friends.xhtml">Mes amis</a>
+				<a href="friends.xhtml">Mes amis #{friendRequestCounter == 0 ? '' : "(".concat(friendRequestCounter).concat(')')}</a>
 			    </li>
 			    <li class="#{view.viewId eq '/settings.xhtml' ? 'active' : ''}"><a href="settings.xhtml">Options</a></li>
 			    <li><h:form style="margin:50% 0;"><h:commandLink action="#{loginMBean.logout}" title="Se déconnecter"><i class="icon-off"></i></h:commandLink></h:form></li>
-			</ul>           
+			</ul> 
+			</h:form>
 		    </div>
 
 		    <!-- Mobile Nav

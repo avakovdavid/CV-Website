@@ -67,7 +67,7 @@
 
                             <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
                                 <span class="gallery-icons">
-				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests friendsList"></p:commandLink>
+				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests friendsList menu"></p:commandLink>
 				    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
 					<f:param name="id" value="#{friend.id}"/>
 				    </h:link>
