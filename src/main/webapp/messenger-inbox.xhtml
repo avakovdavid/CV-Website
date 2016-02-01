@@ -91,7 +91,12 @@
 				</p:panelGrid>
 				
 				    <br/><h:outputText value="#{messageMBean.selectedMsg.content}"/><br/><br/>
-				    <p:commandButton id='submit' styleClass="btn btn-success" value="Répondre"  ajax='false'/>
+				    
+				    <h:link  id="sendMsgButton" styleClass="btn btn-success" value="Répondre"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
+					<f:param name="user" value="#{messageMBean.selectedMsg.fromU.id}"/>
+					<f:param name="subject" value="RE : #{messageMBean.selectedMsg.subject}"/>
+					<f:param name="content" value="----------#{messageMBean.selectedMsg.content}"/>
+				    </h:link>
 			    </p:outputPanel>
 			</p:dialog>
 		    </h:form>

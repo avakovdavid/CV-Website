@@ -31,7 +31,6 @@ public class UserConverter implements Converter{
 	if (o == null || o.equals("")) {  
             return "";  
         } else {
-	    System.out.println("teeeeest STRING : " + o);
             return String.valueOf(((User) o).getId());  
         }  
     }
