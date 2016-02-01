@@ -66,8 +66,12 @@
 			    forceSelection="true"
 			    required="true"
 			    multiple="false"
-			    placeholder="Utilisateur">
+			    placeholder="Utilisateur" emptyMessage="Aucun utilisateur trouvé.">
 
+			    <p:column>
+				<img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{u.firstName} #{u.lastName}"/> 
+			    </p:column>
+			    
 			    <p:column>
 				<h:outputText value="#{u.firstName}" />
 			    </p:column>
