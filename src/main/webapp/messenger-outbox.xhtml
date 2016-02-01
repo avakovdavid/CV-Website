@@ -89,7 +89,12 @@
 				</p:panelGrid>
 				
 				<br/><h:outputText value="#{messageMBean.selectedMsg.content}"/><br/><br/>
-				<h:link  id="sendMsgButton" styleClass="btn btn-success" value="Transférer"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
+				<h:link  id="sendMsgButton" styleClass="btn btn-large btn-success" value="Répondre"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
+				    <f:param name="user" value="#{messageMBean.selectedMsg.fromU.id}"/>
+				    <f:param name="subject" value="RE : #{messageMBean.selectedMsg.subject}"/>
+				    <f:param name="content" value="----------#{messageMBean.selectedMsg.content}"/>
+				</h:link>
+				<h:link  id="transferMsgButton" styleClass="btn btn-success" value="Transférer"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
 				    <f:param name="subject" value="FW : #{messageMBean.selectedMsg.subject}"/>
 				    <f:param name="content" value="----------#{messageMBean.selectedMsg.content}"/>
 				</h:link>
