@@ -92,15 +92,16 @@
 				
 				<br/><h:outputText value="#{messageMBean.selectedMsg.content}"/><br/><br/>
 
-				<h:link  id="sendMsgButton" styleClass="btn btn-large btn-success" value="Répondre"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
-				    <f:param name="user" value="#{messageMBean.selectedMsg.fromU.id}"/>
-				    <f:param name="subject" value="RE : #{messageMBean.selectedMsg.subject}"/>
-				    <f:param name="content" value="----------#{messageMBean.selectedMsg.content}"/>
-				</h:link>
-				<h:link  id="transferMsgButton" styleClass="btn btn-success" value="Transférer"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
-				    <f:param name="subject" value="FW : #{messageMBean.selectedMsg.subject}"/>
-				    <f:param name="content" value="----------#{messageMBean.selectedMsg.content}"/>
-				</h:link>
+				<h:commandLink  id="sendMsgButton" styleClass="btn btn-large btn-success" value="Répondre"  action="/messenger-new.xhtml?faces-redirect=true" >
+				    <f:setPropertyActionListener target="#{messageMBean.toU}" value="#{messageMBean.selectedMsg.fromU}"/>
+				    <f:setPropertyActionListener target="#{messageMBean.subject}" value="RE : #{messageMBean.selectedMsg.subject}"/>
+				    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{messageMBean.selectedMsg.dateCreation} -----&#13;#{messageMBean.selectedMsg.content}"/>
+				</h:commandLink>
+				<h:commandLink  id="transferMsgButton" styleClass="btn btn-success" value="Transférer"  action="/messenger-new.xhtml?faces-redirect=true">
+				    <f:setPropertyActionListener target="#{messageMBean.toU}" value=""/>
+				    <f:setPropertyActionListener target="#{messageMBean.subject}" value="FW : #{messageMBean.selectedMsg.subject}"/>
+				    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{messageMBean.selectedMsg.dateCreation} -----&#13;#{messageMBean.selectedMsg.content}"/>
+				</h:commandLink>
 			    </p:outputPanel>
 			</p:dialog>
 		    </h:form>

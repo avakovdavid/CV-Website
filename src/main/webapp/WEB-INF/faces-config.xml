@@ -28,22 +28,10 @@
     <managed-bean>
 	<managed-bean-name>messageMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.MessageManagedBean</managed-bean-class>
-	<managed-bean-scope>request</managed-bean-scope>
+	<managed-bean-scope>session</managed-bean-scope>
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
-	</managed-property>
-	<managed-property>
-	    <property-name>subject</property-name>
-	    <value>#{param.subject}</value>
-	</managed-property>
-	<managed-property>
-	    <property-name>toU</property-name>
-	    <value>#{userMBean.getUserById(param.user)}</value>
-	</managed-property>
-	<managed-property>
-	    <property-name>content</property-name>
-	    <value>#{param.content}</value>
 	</managed-property>
     </managed-bean>
     <managed-bean>
