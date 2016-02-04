@@ -82,9 +82,7 @@
 			</p:column>
 			
 			<p:column headerText="Action" style="width:110px;">
-			    <p:commandLink value="Supprimer" action='#{userSkillMBean.removeSkill(skill)}' ajax='true' update="skills">
-				<f:attribute name="skill" value="#{skill}"/>
-			    </p:commandLink>
+			    <p:commandLink value="Supprimer" action='#{userSkillMBean.removeSkill(skill)}' ajax='true' update="skills"/>
 			</p:column>
 			
 		    </p:dataTable>
@@ -107,22 +105,38 @@
 			</p:outputPanel>
 		    </p:dialog>
 		    <!-- END SKILLS AREA -->
+		
+		    <p:dataTable id="sections" var="section" value="#{sectionMBean.sections}" draggableRows="true" emptyMessage="Aucune section à afficher." resizableColumns="true" >
+			<p:ajax event="rowReorder" listener="#{sectionMBean.swapSections}" update="sections msgs" />
+			
+			<p:column headerText="Séction" style="width:100px;">
+			    <h:outputText value="#{section.title}"/>
+			</p:column>
 		    
+			<p:column headerText="Action" style="width:110px;">
+			    <p:commandLink value="Supprimer" action='#{sectionMBean.removeSection(section)}' ajax='true' update="sections"/>
+			</p:column>
 		    
+		    </p:dataTable>
+		    <p:commandLink oncomplete="PF('newSectionDialog').show()">
+			<i class="icon-plus"></i>ajouter une séction
+		    </p:commandLink>
+		    <p:dialog header="Nouvelle Séction" widgetVar="newSectionDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+			<p:outputPanel id="sectionDetail">
+			    <h:outputLabel for="sectionTitle" value="Titre :" />
+			    <p:inputText id="sectionTitle" value="#{sectionMBean.sectionTitle}"/><br/>
+			    
+			    <p:commandButton id="addSectionButton" value="Ajouter" action='#{sectionMBean.addSection}' ajax='true' update="sections"/>
+			</p:outputPanel>
+		    </p:dialog>
 		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    
+		    <br/><br/>
 		    <div class="row">
                         <div class="span2">
 			    <p:commandButton id='submit' styleClass="btn btn-success" value="Mettre à jour" action='#{cvMBean.update}' ajax='true' update="cv-form"/>
                         </div>
                     </div>
-		</h:form>
+		</h:form>  
             </div>
 
             <ui:insert name="sidebar" >

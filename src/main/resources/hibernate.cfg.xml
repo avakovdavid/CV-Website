@@ -22,5 +22,7 @@
     <mapping class="cvpicker.hibernate.Skill"/>
     <mapping class="cvpicker.hibernate.UserSkill"/>
     <mapping class="cvpicker.hibernate.UserSkillPK"/>
+    <mapping class="cvpicker.hibernate.Section"/>
+    <mapping class="cvpicker.hibernate.Element"/>
   </session-factory>
 </hibernate-configuration>
