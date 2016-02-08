@@ -109,26 +109,78 @@
 		    <p:dataTable id="sections" var="section" value="#{sectionMBean.sections}" draggableRows="true" emptyMessage="Aucune section à afficher." resizableColumns="true" >
 			<p:ajax event="rowReorder" listener="#{sectionMBean.swapSections}" update="sections msgs" />
 			
-			<p:column headerText="Séction" style="width:100px;">
-			    <h:outputText value="#{section.title}"/>
+			<p:column headerText="Séction" style="width:200px;" styleClass="wrap">
+			    <h3 class="title-bg"><h:outputText value="#{section.title}"/></h3>
 			</p:column>
 		    
-			<p:column headerText="Action" style="width:110px;">
-			    <p:commandLink value="Supprimer" action='#{sectionMBean.removeSection(section)}' ajax='true' update="sections"/>
+			<p:column headerText="Contenu">
+			    
+			    <p:dataTable var="element" value="#{sectionMBean.getElementsBySection(section)}" draggableRows="true" emptyMessage="Aucun élément dans la section." resizableColumns="true" >
+				<p:ajax event="rowReorder" listener="#{sectionMBean.swapElements}" update="cv-form:sections msgs" />
+				
+				<p:column headerText="Element" styleClass="wrap">
+				    <h4><h:outputText value="#{element.title}"/></h4>
+				    <h:outputText value="#{element.description}"/><br/>
+				    <h:outputText value="#{element.dateStart}"/> - <h:outputText value="#{element.dateEnd}"/><br/>
+				    <i><h:outputText value="#{element.informations}"/></i><br/>
+				</p:column>
+				
+				<p:column style="width:20px;">
+				    <p:commandLink action='#{sectionMBean.removeElement(section, element)}' ajax='true' update="cv-form:sections">
+					<i class="icon-minus"></i>
+				    </p:commandLink>
+				</p:column>
+
+			    </p:dataTable>
+			    
+			    <p:commandLink actionListener="#{sectionMBean.prepareElementDialog(section)}" oncomplete="PF('newElementDialog').show()" update="cv-form:newElementDialog">
+				<i class="icon-plus"></i>ajouter un élément
+			    </p:commandLink>
+			</p:column>
+			
+			<p:column style="width:20px;">
+			    <p:commandLink action='#{sectionMBean.removeSection(section)}' ajax='true' update="sections">
+				<i class="icon-minus"></i>
+			    </p:commandLink>
 			</p:column>
 		    
 		    </p:dataTable>
 		    <p:commandLink oncomplete="PF('newSectionDialog').show()">
 			<i class="icon-plus"></i>ajouter une séction
 		    </p:commandLink>
-		    <p:dialog header="Nouvelle Séction" widgetVar="newSectionDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+		    
+		    <!-- NEW SECTION DIALOG -->
+		    <p:dialog id="newSectionDialog" header="Nouvelle Séction" widgetVar="newSectionDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
 			<p:outputPanel id="sectionDetail">
 			    <h:outputLabel for="sectionTitle" value="Titre :" />
 			    <p:inputText id="sectionTitle" value="#{sectionMBean.sectionTitle}"/><br/>
 			    
-			    <p:commandButton id="addSectionButton" value="Ajouter" action='#{sectionMBean.addSection}' ajax='true' update="sections"/>
+			    <p:commandButton id="addSectionButton" value="Ajouter" action='#{sectionMBean.addSection}' ajax='true' update="sections newSectionDialog"/>
 			</p:outputPanel>
 		    </p:dialog>
+		    
+		    <!-- NEW ELEMENT DIALOG -->
+		    <p:dialog id="newElementDialog" header="Nouvel Elément" widgetVar="newElementDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+			<p:outputPanel id="elementDetail">
+			    <h:outputLabel for="elementTitle" value="Titre :" />
+			    <p:inputText id="elementTitle" value="#{sectionMBean.elementTitle}"/><br/>
+			    
+			    <h:outputLabel for="elementDescription" value="Description :" />
+			    <p:inputTextarea id="elementDescription" value="#{sectionMBean.elementDescription}"/><br/>
+			    
+			    <p:outputLabel for="elementDateStart" value="Date de début :" />
+			    <p:calendar id="elementDateStart" value="#{sectionMBean.elementDateStart}" />
+			    
+			    <p:outputLabel for="elementDateEnd" value="Date de fin :" />
+			    <p:calendar id="elementDateEnd" value="#{sectionMBean.elementDateEnd}" />
+			    
+			    <h:outputLabel for="elementInformations" value="Informations :" />
+			    <p:inputTextarea id="elementInformations" value="#{sectionMBean.elementInformations}"/><br/>
+			    
+			    <p:commandButton id="addElementButton" value="Ajouter" action='#{sectionMBean.addElement}' ajax='true' update="sections newElementDialog"/>
+			</p:outputPanel>
+		    </p:dialog>
+		    
 		    
 		    <br/><br/>
 		    <div class="row">
