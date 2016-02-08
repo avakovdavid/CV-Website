@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Element.findByDateEnd", query = "SELECT e FROM Element e WHERE e.dateEnd = :dateEnd"),
     @NamedQuery(name = "Element.findByInformations", query = "SELECT e FROM Element e WHERE e.informations = :informations")})
 public class Element implements Serializable {
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
     @Basic(optional = false)
     @NotNull
     @Column(name = "position")
@@ -54,10 +57,6 @@ public class Element implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "title")
     private String title;
-    @Column(name = "description")
-    private Integer description;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "dateStart")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateStart;
@@ -98,14 +97,6 @@ public class Element implements Serializable {
 
     public void setTitle(String title) {
 	this.title = title;
-    }
-
-    public Integer getDescription() {
-	return description;
-    }
-
-    public void setDescription(Integer description) {
-	this.description = description;
     }
 
     public Date getDateStart() {
@@ -171,6 +162,14 @@ public class Element implements Serializable {
 
     public void setPosition(int position) {
 	this.position = position;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    public void setDescription(String description) {
+	this.description = description;
     }
     
 }
