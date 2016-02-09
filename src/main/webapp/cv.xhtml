@@ -90,14 +90,18 @@
 	
 	<h3 class="title-bg">Compétences</h3>
         <div class="row"> 
-	    <h:form id="cvSkills" styleClass="removeBackground">
-		<p:dataList id="skills" var="skill" itemStyleClass="span2" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher.">
-		    <h6>#{skill.skill.name}</h6>
-		    <p>#{skill.description}</p>
-		    <div class="progress progress-#{skill.mark le 25 ? 'danger' : skill.mark le 50 ? 'warning' : skill.mark le 75 ? 'info' : skill.mark le 100 ? 'success' : ''} progress-striped">
-			<div class="bar" style="width: #{''.concat(skill.mark).concat('%')};">#{skill.mark}%</div>
-		    </div>
-		</p:dataList>
+	    <h:form id="cvSkills" styleClass="span12 removeBackground">
+		<p:dataGrid id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher." columns="4" layout="grid" paginator="false">
+		    <p:panel style="text-align:center">
+			<h:panelGrid columns="1" style="width:100%">
+			    <h6>#{skill.skill.name}</h6>
+			    <p>#{skill.description}</p>
+			    <div class="progress progress-#{skill.mark le 25 ? 'danger' : skill.mark le 50 ? 'warning' : skill.mark le 75 ? 'info' : skill.mark le 100 ? 'success' : ''} progress-striped">
+				<div class="bar" style="width: #{''.concat(skill.mark).concat('%')};">#{skill.mark}%</div>
+			    </div>
+			</h:panelGrid>
+		    </p:panel>
+		</p:dataGrid>
 	    </h:form>
         </div>
     </div> <!-- End Container -->
