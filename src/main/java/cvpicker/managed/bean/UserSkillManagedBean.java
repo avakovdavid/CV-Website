@@ -4,22 +4,17 @@
  */
 package cvpicker.managed.bean;
 
-import cvpicker.hibernate.Friend;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Skill;
 import cvpicker.hibernate.User;
 import cvpicker.hibernate.UserSkill;
 import cvpicker.hibernate.UserSkillPK;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.NonUniqueObjectException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
@@ -54,7 +49,7 @@ public class UserSkillManagedBean implements Serializable{
     }
     
     public List<UserSkill> getUserSkillsByUser(User u){
-	List<UserSkill> result = new ArrayList<UserSkill>();
+	List<UserSkill> result;
 	
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	
@@ -65,7 +60,6 @@ public class UserSkillManagedBean implements Serializable{
 	result = criteria.list();
 	
 	session.close();
-	System.out.println(u.getId());
 	return result; 
     }
     
