@@ -54,6 +54,7 @@
 	<c:set var="id" value="#{request.getParameter('id')}" />
 	<c:set var="user" value="#{id.length() > 0 ? userMBean.getUserById(id) : loginMBean.currentUser }" />
 	<c:set var="cv" value="#{user.cv}" />
+	#{messageMBean.setToU(user)}
 	
 	
 	<div class="row">
@@ -72,12 +73,10 @@
 				<f:param name="id" value="#{user.id}"/>
 			    </p:commandButton>
 			</c:if>
-			
-			
-			<h:link  id="sendMsgButton" styleClass="btn btn-large btn-info" value="Envoyer un message"  outcome="/messenger-new.xhtml?faces-redirect=true" includeViewParams="true">
-			    <f:param name="user" value="#{user.id}"/>
-			</h:link>
-			
+			<h:commandLink  id="sendMsgButton" styleClass="btn btn-large btn-info" value="Envoyer un message"  action="/messenger-new.xhtml?faces-redirect=true" >
+			    <f:setPropertyActionListener target="#{messageMBean.subject}" value=""/>
+			    <f:setPropertyActionListener target="#{messageMBean.content}" value=""/>
+			</h:commandLink>
 		    </p>
 		</h:form>		
             </div>
@@ -104,6 +103,25 @@
 		</p:dataGrid>
 	    </h:form>
         </div>
+	
+	<h:form id="cvSections" styleClass="removeBackground">
+	    <p:dataGrid id="sections" var="section" value="#{sectionMBean.getUserSectionsByUser(user)}" emptyMessage="Aucune section à afficher." columns="1" layout="grid" paginator="false">	
+		<h3 class="title-bg">#{section.title}</h3>
+		 
+		    <p:dataGrid id="elements" var="element" value="#{sectionMBean.getElementsBySection(section)}" emptyMessage="Aucun élément dans la section." columns="1" layout="tabular" paginator="false">	
+			    <div class="span8">
+				<h4>#{element.title}</h4>
+				<b>#{element.description}</b><br/>
+				<i>#{element.informations}</i>
+			    </div>
+			
+			     <div class="span4" style="text-align: right;">
+				 <p>#{element.dateStart} - #{element.dateEnd}</p>
+			     </div>
+		    </p:dataGrid>
+		
+	    </p:dataGrid>
+	</h:form>
     </div> <!-- End Container -->
 
     <ui:insert name="footer" >

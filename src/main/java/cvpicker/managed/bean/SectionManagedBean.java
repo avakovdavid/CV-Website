@@ -7,6 +7,7 @@ package cvpicker.managed.bean;
 import cvpicker.hibernate.Element;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Section;
+import cvpicker.hibernate.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +67,21 @@ public class SectionManagedBean implements Serializable{
 	
 		
 	session.close();
+    }
+    
+    public List<Section> getUserSectionsByUser(User u){
+	List<Section> result;
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	
+	Criteria criteria = session.createCriteria(Section.class);
+	criteria.add(Restrictions.eq("user", u));
+	criteria.addOrder(Order.asc("position"));	
+	
+	result = criteria.list();
+	
+	session.close();
+	return result; 
     }
     
     public void addSection(){
