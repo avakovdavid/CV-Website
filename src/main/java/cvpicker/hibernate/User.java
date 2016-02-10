@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,6 +40,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Section> sectionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserSkill> userSkillList;
+    @JoinColumn(name = "cv", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Cv cv;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userB")
     private List<Friend> friendList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userA")
@@ -205,6 +213,32 @@ public class User implements Serializable {
 
     public void setFriendList1(List<Friend> friendList1) {
 	this.friendList1 = friendList1;
+    }
+
+    public Cv getCv() {
+	return cv;
+    }
+
+    public void setCv(Cv cv) {
+	this.cv = cv;
+    }
+
+    @XmlTransient
+    public List<UserSkill> getUserSkillList() {
+	return userSkillList;
+    }
+
+    public void setUserSkillList(List<UserSkill> userSkillList) {
+	this.userSkillList = userSkillList;
+    }
+
+    @XmlTransient
+    public List<Section> getSectionList() {
+	return sectionList;
+    }
+
+    public void setSectionList(List<Section> sectionList) {
+	this.sectionList = sectionList;
     }
     
 }

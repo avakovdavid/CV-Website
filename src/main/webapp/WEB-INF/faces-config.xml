@@ -28,7 +28,7 @@
     <managed-bean>
 	<managed-bean-name>messageMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.MessageManagedBean</managed-bean-class>
-	<managed-bean-scope>request</managed-bean-scope>
+	<managed-bean-scope>session</managed-bean-scope>
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
@@ -63,6 +63,33 @@
 	<managed-property>
 	    <property-name>userBean</property-name>
 	    <value>#{userMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>cvMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.CvManagedBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userSkillMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.UserSkillManagedBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>sectionMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.SectionManagedBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
 	</managed-property>
     </managed-bean>
 </faces-config>

@@ -35,8 +35,6 @@ public class MessageManagedBean implements Serializable{
     private String content;
     private User fromU;
     private User toU;
-    private String message;
-    private String typeMessage;
     
     private long newMsgCounter;
     private Message selectedMsg;
@@ -218,7 +216,7 @@ public class MessageManagedBean implements Serializable{
      */
     public void setSelectedMsg(Message selectedMsg) {
 	this.selectedMsg = selectedMsg;
-	if(selectedMsg.getFromU() != loginBean.getCurrentUser() && !selectedMsg.getWasRead()){
+	if(!selectedMsg.getFromU().equals(loginBean.getCurrentUser()) && !selectedMsg.getWasRead()){
 	    selectedMsg.setWasRead(true);
 	    Session session = HibernateUtil.getSessionFactory().openSession();
 	    Transaction tx = session.beginTransaction();

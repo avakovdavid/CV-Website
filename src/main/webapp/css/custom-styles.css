@@ -809,3 +809,30 @@ a.accordion-toggle{background: #f5f5f5;}
     background:none;
     border:none;
 }
+
+.removeBackground ul{
+    list-style: none;
+}
+
+.preformatted {
+    white-space: pre-wrap;
+}
+
+.ui-orderlist-list {
+    width:500px !important;
+}
+
+.ui-spinner-input {
+    margin-bottom: 0 !important;
+    margin-right: 16px;
+    width:36px;
+}
+
+.ui-spinner {
+    margin-bottom: 9px;
+}
+
+.ui-datatable tbody td.wrap {
+    white-space: normal;
+    word-wrap: break-word;
+}

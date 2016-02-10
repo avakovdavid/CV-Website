@@ -1,5 +1,6 @@
 package cvpicker.managed.bean;
 
+import cvpicker.hibernate.Cv;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.User;
 import java.io.Serializable;
@@ -45,12 +46,13 @@ public class UserManagedBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "L'utilisateur avec l'adresse '"+email+"' existe déjà", ""));
 		return ;
 	    }
-	    
+	    Cv cv = new Cv();
 	    User user = new User();
 	    user.setId(getId());
 	    user.setFirstName(getFirstName());
 	    user.setLastName(getLastName());
 	    user.setEmail(getEmail());
+	    user.setCv(cv);
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", ""));
@@ -64,6 +66,7 @@ public class UserManagedBean implements Serializable {
 	    user.setPassword(encryptedString);
 
 	    tx = session.beginTransaction();
+	    session.save(cv);
 	    session.save(user);
 	    tx.commit();
 	    

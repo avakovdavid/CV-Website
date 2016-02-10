@@ -50,10 +50,9 @@
 	</ui:insert>
 	
 	
-        <h2>Nouveau message</h2>
+	<h2>Nouveau message</h2>
         <div class="row">
             <div class="span8 contact">
-		<h:messages globalOnly="false" fatalClass="alert alert-error" errorClass="alert alert-error" warnClass="alert alert-info" infoClass="alert alert-success"/>
 		<h:form id="contact-form">
 		    <div class="input-prepend">
                         <span class="add-on"><i class="icon-user"></i></span>
@@ -67,8 +66,12 @@
 			    forceSelection="true"
 			    required="true"
 			    multiple="false"
-			    placeholder="Utilisateur">
+			    placeholder="Utilisateur" emptyMessage="Aucun utilisateur trouvé.">
 
+			    <p:column>
+				<img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{u.firstName} #{u.lastName}"/> 
+			    </p:column>
+			    
 			    <p:column>
 				<h:outputText value="#{u.firstName}" />
 			    </p:column>
@@ -91,44 +94,9 @@
 		</h:form>
             </div>
 
-            <div class="span4 sidebar">
-                <h5 class="title-bg">CV les plus populaires</h5>
-                <ul class="popular-posts">
-                    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-                    </li>
-                    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-                    </li>
-		    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-                    </li>
-                </ul>
-
-                <h5 class="title-bg">Amis</h5>
-                <div class="footer-col">
-                    <ul class="img-feed">
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                    </ul>
-                </div>
-            </div>
+            <ui:insert name="sidebar" >
+		<ui:include src="/WEB-INF/includes/right-sidebar.xhtml" />
+	    </ui:insert>
         </div>
     </div> <!-- End Container -->
 

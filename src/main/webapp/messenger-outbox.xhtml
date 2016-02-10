@@ -89,7 +89,11 @@
 				</p:panelGrid>
 				
 				<br/><h:outputText value="#{messageMBean.selectedMsg.content}"/><br/><br/>
-				<p:commandButton id='submit' styleClass="btn btn-success" value="Transférer"  ajax='false'/>
+				<h:commandLink  id="transferMsgButton" styleClass="btn btn-success" value="Transférer"  action="/messenger-new.xhtml?faces-redirect=true">
+				    <f:setPropertyActionListener target="#{messageMBean.toU}" value=""/>
+				    <f:setPropertyActionListener target="#{messageMBean.subject}" value="FW : #{messageMBean.selectedMsg.subject}"/>
+				    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{messageMBean.selectedMsg.dateCreation} -----&#13;#{messageMBean.selectedMsg.content}"/>
+				</h:commandLink>
 			    </p:outputPanel>
 			</p:dialog>
 		    </h:form>

@@ -67,8 +67,10 @@
 
                             <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
                                 <span class="gallery-icons">
-				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests"></p:commandLink>
-                                    <a href="cv-full-width.htm" class="item-details-link" title="Voir le CV"></a>
+				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests friendsList menu"></p:commandLink>
+				    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
+					<f:param name="id" value="#{friend.id}"/>
+				    </h:link>
 				    <p:commandLink styleClass="item-reject-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendRequests"></p:commandLink>
                                 </span>
                             </span>
@@ -92,7 +94,9 @@
                             <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
                                 <span class="gallery-icons">
                                     <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Voir la photo" data-rel="prettyPhoto"></a>
-                                    <a href="cv-full-width.htm" class="item-details-link" title="Voir le CV"></a>
+                                    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
+					<f:param name="id" value="#{friend.id}"/>
+				    </h:link>
 				    <p:commandLink styleClass="item-remove-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendsList"></p:commandLink>
                                 </span>
                             </span>
