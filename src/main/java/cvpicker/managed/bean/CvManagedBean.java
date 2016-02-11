@@ -17,6 +17,8 @@ public class CvManagedBean implements Serializable{
 
     private String title;
     private String description;
+    
+    private String[] templates;
 
     private LoginManagedBean loginBean;
     
@@ -25,6 +27,8 @@ public class CvManagedBean implements Serializable{
 	Cv cv = loginBean.getCurrentUser().getCv();
 	title = cv.getTitle();
 	description = cv.getDescription();
+	
+	setTemplates(new String[]{"full-width","right-sidebar","left-sidebar","double-sidebar"});
     }
     
     public void update(){
@@ -96,5 +100,19 @@ public class CvManagedBean implements Serializable{
      */
     public void setLoginBean(LoginManagedBean loginBean) {
 	this.loginBean = loginBean;
+    }
+
+    /**
+     * @return the templates
+     */
+    public String[] getTemplates() {
+	return templates;
+    }
+
+    /**
+     * @param templates the templates to set
+     */
+    public void setTemplates(String[] templates) {
+	this.templates = templates;
     }
 }

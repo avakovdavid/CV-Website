@@ -12,15 +12,6 @@
     
     <body>
 	<ui:composition>
-        
-	
-	
-	<c:set var="id" value="#{request.getParameter('id')}" />
-	<c:set var="user" value="#{id.length() > 0 ? userMBean.getUserById(id) : loginMBean.currentUser }" />
-	<c:set var="cv" value="#{user.cv}" />
-	#{messageMBean.setToU(user)}
-	
-	
 	<div class="row">
             <div class="span3">
                 <img src="img/gallery/gallery-img-1-full.jpg" alt="Gallery"/>
@@ -86,10 +77,6 @@
 		
 	    </p:dataGrid>
 	</h:form>
-	
-	
-	
-	
 	</ui:composition>
     </body>
 </html>

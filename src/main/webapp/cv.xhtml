@@ -3,7 +3,6 @@
      xmlns:h='http://java.sun.com/jsf/html'
      xmlns:f='http://java.sun.com/jsf/core'
      xmlns:c="http://java.sun.com/jsp/jstl/core"
-     xmlns:p="http://primefaces.org/ui"
      xmlns:ui="http://java.sun.com/jsf/facelets">  
 
 <h:head>
@@ -45,17 +44,19 @@
     <div class="color-bar-2 color-bg"></div>
     
     <div class="container main-container">
-	
 	<ui:insert name="header" >
 	    <ui:include src="/WEB-INF/includes/header.xhtml" />
 	</ui:insert>
 	
+	<c:set var="id" value="#{request.getParameter('id')}" />
+	<c:set var="user" value="#{id.length() > 0 ? userMBean.getUserById(id) : loginMBean.currentUser }" />
+	<c:set var="cv" value="#{user.cv}" />
+	#{messageMBean.setToU(user)}
+	
 	<ui:insert name="header" >
-	    <ui:include src="/WEB-INF/includes/cv/#{loginMBean.currentUser.cv.template}.xhtml" />
+	    <ui:include src="/WEB-INF/includes/cv/#{cv.template}.xhtml" />
 	</ui:insert>
-	
-	
-    </div> <!-- End Container -->
+    </div>
 
     <ui:insert name="footer" >
 	<ui:include src="/WEB-INF/includes/footer.xhtml" />
