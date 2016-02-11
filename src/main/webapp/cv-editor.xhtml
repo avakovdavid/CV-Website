@@ -56,6 +56,12 @@
             <div class="span8 contact">
 		<h:form id="cv-form">
 
+		    <p:outputLabel for="template" value="Thème :" />
+		    <p:selectOneMenu id="template" value="#{loginMBean.currentUser.cv.template}">
+			<f:selectItem itemLabel="Choisissez le template" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{cvMBean.templates}" />
+		    </p:selectOneMenu>
+		    
 		    <h:outputLabel for="title" value="Titre :" />
 		    <p:inputText id="title" required="true" requiredMessage="Veuillez saisir la descriptione titre de votre CV." value="#{cvMBean.title}"/>
 		    
