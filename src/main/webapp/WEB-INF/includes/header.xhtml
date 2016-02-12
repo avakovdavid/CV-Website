@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'
      xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
      xmlns:p="http://primefaces.org/ui"
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:ui="http://java.sun.com/jsf/facelets">  
@@ -19,8 +20,11 @@
 		    <a href="index.xhtml"><img src="img/logo.png" alt="" /></a>
 		    <h5>
 			<div class="input-append">
-			    <h:form action="search.htm">
-				<input id="appendedInputButton" name="searchStr" size="16" type="text" placeholder="Recherche"/><button class="btn" type="submit"><i class="icon-search"></i></button>
+			    <h:form id="searchForm" >
+				<p:inputText id="querryString" size="10" type="text" placeholder="Recherche" value="#{searchMBean.query}"/>
+				<p:commandButton action="#{searchMBean.doSearch}" styleClass="btn btn-small" icon="ui-icon-search" title="Rechercher" oncomplete="$('#querryString').text = '';">
+				    
+				</p:commandButton>
 			    </h:form>
 			</div>
 		    </h5>
