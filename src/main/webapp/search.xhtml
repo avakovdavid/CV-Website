@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">  
+
+<h:head>
+    <f:event listener="#{loginMBean.checkLoggedIn}" type="preRenderView" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Recherche - CVPicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- CSS
+    ================================================== -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="css/custom-styles.css"/>
+
+    <!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<link rel="stylesheet" href="css/style-ie.css"/>
+    <![endif]--> 
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png"/>
+
+    <!-- JS
+    ================================================== -->
+    <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+</h:head>
+<h:body>
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
+    <div class="color-bar-1"></div>
+    <div class="color-bar-2 color-bg"></div>
+    
+    <div class="container main-container">
+	
+	<ui:insert name="header" >
+	    <ui:include src="/WEB-INF/includes/header.xhtml" />
+	</ui:insert>
+	
+        <h2>Résultat de recherche pour "#{searchMBean.query}"</h2>
+        <div class="row">
+            <div class="span8">
+		<h:form id="searchResult" styleClass="removeBackground">
+		    <p:dataList id="result" value="#{searchMBean.result}" var="result" type="unordered" itemType="none" paginator="true" rows="10" 
+				    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Aucune résultat trouvé.">
+			<article class="clearfix">
+			    <h:link outcome="/cv.xhtml?faces-redirect=true">
+				<f:param name="id" value="#{result.id}" />
+				<img src="img/gallery/gallery-img-1-4col.jpg" alt="Post Thumb" class="align-left"/>
+			    </h:link>
+			    <h4 class="title-bg"><a href="cv.xhtml?id=#{result.id}">#{result.firstName} #{result.lastName}</a></h4>
+			    <p>#{result.cv.title}</p>
+			    
+			    <h:link styleClass="btn btn-mini btn-inverse" value="Voir ce CV"  outcome="/cv.xhtml?faces-redirect=true">
+				<f:param name="id" value="#{result.id}" />
+			    </h:link>
+
+			    <div class="post-summary-footer">
+				<ul class="post-data-3">    
+				    <li><i class="icon-calendar"></i> 09/04/15</li>
+				    <li><i class="icon-comment"></i> <a href="#">5 Commentaires</a></li>
+				    <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
+				</ul>
+			    </div>
+			</article>
+		    </p:dataList>
+		</h:form>
+	    </div>
+            <ui:insert name="sidebar" >
+		<ui:include src="/WEB-INF/includes/right-sidebar.xhtml" />
+	    </ui:insert>
+        </div>
+    </div> <!-- End Container -->
+
+    <ui:insert name="footer" >
+	<ui:include src="/WEB-INF/includes/footer.xhtml" />
+    </ui:insert>
+    
+</h:body>
+</html>
