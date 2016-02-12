@@ -92,4 +92,13 @@
 	    <value>#{loginMBean}</value>
 	</managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>searchMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.SearchManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+    </managed-bean>
 </faces-config>
