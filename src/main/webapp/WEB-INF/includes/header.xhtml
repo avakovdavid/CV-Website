@@ -59,7 +59,13 @@
 			    <li class="#{view.viewId eq '/friends.xhtml' ? 'active' : ''}">
 				<a href="friends.xhtml">Mes amis #{friendRequestCounter == 0 ? '' : "(".concat(friendRequestCounter).concat(')')}</a>
 			    </li>
-			    <li class="#{view.viewId eq '/settings.xhtml' ? 'active' : ''}"><a href="settings.xhtml">Options</a></li>
+			    <li class="dropdown #{view.viewId eq '/settings.xhtml' or view.viewId eq '/profil.xhtml' ? 'active' : ''}">
+				<a class="dropdown-toggle" href="cv.xhtml">Paramètres <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				    <li class="#{view.viewId eq '/profil.xhtml' ? 'active' : ''}"><a href="profil.xhtml"><i class="ui-icon-person"></i>Profil</a></li>
+				    <li class="#{view.viewId eq '/settings.xhtml' ? 'active' : ''}"><a href="settings.xhtml">Options</a></li>
+				</ul>
+			    </li>
 			    <li><h:form style="margin:50% 0;"><p:commandLink action="#{loginMBean.logout}"  title="Se déconnecter"><i class="icon-off"></i></p:commandLink></h:form></li>
 			</ul> 
 			</h:form>
