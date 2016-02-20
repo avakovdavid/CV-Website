@@ -83,6 +83,26 @@ public class UserManagedBean implements Serializable {
 	    session.close();
 	}
     }
+    
+    public void update(){
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	try {
+	    tx = session.beginTransaction();
+	    session.update(loginBean.getCurrentUser());
+	    tx.commit();
+
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a été mis à jour.", ""));
+	} catch (Exception e) {
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	} finally {
+	    session.close();
+	}
+    }
  
     public List<User> getUsers() {
 	Session session = HibernateUtil.getSessionFactory().openSession();

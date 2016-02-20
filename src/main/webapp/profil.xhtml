@@ -38,6 +38,9 @@
     <script src="js/jquery.prettyPhoto.js"></script>
 </h:head>
 <h:body>
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
     <div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
     
@@ -61,6 +64,21 @@
 		    </h:panelGrid>
 
 		    <p:commandButton value="Crop" action="#{cropperMBean.crop}" update="cropped msgs" icon="ui-icon-scissors"/>
+		</h:form>
+		
+		
+		<h:form id="profil-form">
+		    <h:outputLabel for="firstName" value="Nom :" />
+		    <p:inputText id="firstName" required="true" requiredMessage="Veuillez saisir votre nom." value="#{loginMBean.currentUser.firstName}"/>
+		    
+		    <h:outputLabel for="lastName" value="Prénom :" />
+		    <p:inputText id="lastName" required="true" requiredMessage="Veuillez saisir votre prénom." value="#{loginMBean.currentUser.lastName}"/>
+		    
+		    <div class="row">
+                        <div class="span2">
+			    <p:commandButton id='submit' styleClass="btn btn-success" value="Mettre à jour" actionListener='#{userMBean.update}'/>
+                        </div>
+                    </div>
 		</h:form>
             </div>
 
