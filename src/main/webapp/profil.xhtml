@@ -68,11 +68,29 @@
 		
 		
 		<h:form id="profil-form">
-		    <h:outputLabel for="firstName" value="Nom :" />
+		    <h:outputLabel for="firstName" value="Nom* :" />
 		    <p:inputText id="firstName" required="true" requiredMessage="Veuillez saisir votre nom." value="#{loginMBean.currentUser.firstName}"/>
 		    
-		    <h:outputLabel for="lastName" value="Prénom :" />
+		    <h:outputLabel for="lastName" value="Prénom* :" />
 		    <p:inputText id="lastName" required="true" requiredMessage="Veuillez saisir votre prénom." value="#{loginMBean.currentUser.lastName}"/>
+		    
+		    <p:outputLabel for="birthday" value="Date de naissance :" />
+		    <p:calendar id="birthday" value="#{loginMBean.currentUser.birthday}" />
+		    
+		    <h:outputLabel for="address" value="Adresse :" />
+		    <p:inputText id="address" value="#{loginMBean.currentUser.address}"/>
+		    
+		    <h:outputLabel for="website" value="Site Web :" />
+		    <p:inputText id="website" value="#{loginMBean.currentUser.website}"/>
+		    
+		    <h:outputLabel for="phoneNumber" value="Téléphone :" />
+		    <p:inputText id="phoneNumber" value="#{loginMBean.currentUser.phoneNumber}"/>
+		    
+		    <h:outputLabel for="drivingLicence" value="Permis de conduire :" />
+		    <p:selectBooleanCheckbox id="drivingLicence" value="#{loginMBean.currentUser.drivingLicence}" />
+		    
+		    <h:outputLabel for="car" value="Véhiculé :" />
+		    <p:selectBooleanCheckbox id="car" value="#{loginMBean.currentUser.car}" />
 		    
 		    <div class="row">
                         <div class="span2">

@@ -6,6 +6,7 @@ package cvpicker.hibernate;
 
 import cvpicker.hibernate.Message;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,6 +23,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -40,6 +44,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+    @Size(max = 255)
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+    @Size(max = 255)
+    @Column(name = "website")
+    private String website;
+    @Size(max = 255)
+    @Column(name = "address")
+    private String address;
+    @Column(name = "drivingLicence")
+    private Boolean drivingLicence;
+    @Column(name = "car")
+    private Boolean car;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Section> sectionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -239,6 +259,54 @@ public class User implements Serializable {
 
     public void setSectionList(List<Section> sectionList) {
 	this.sectionList = sectionList;
+    }
+
+    public Date getBirthday() {
+	return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+	this.birthday = birthday;
+    }
+
+    public String getPhoneNumber() {
+	return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+    }
+
+    public String getWebsite() {
+	return website;
+    }
+
+    public void setWebsite(String website) {
+	this.website = website;
+    }
+
+    public String getAddress() {
+	return address;
+    }
+
+    public void setAddress(String address) {
+	this.address = address;
+    }
+
+    public Boolean getDrivingLicence() {
+	return drivingLicence;
+    }
+
+    public void setDrivingLicence(Boolean drivingLicence) {
+	this.drivingLicence = drivingLicence;
+    }
+
+    public Boolean getCar() {
+	return car;
+    }
+
+    public void setCar(Boolean car) {
+	this.car = car;
     }
     
 }
