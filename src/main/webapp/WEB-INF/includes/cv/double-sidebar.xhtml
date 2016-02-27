@@ -41,6 +41,10 @@
 			</h:commandLink>
 		    </p>
 		</h:form>
+		
+		<ui:insert>
+		    <ui:include src="/WEB-INF/includes/cv/share-buttons.xhtml" />
+		</ui:insert>
                 
                 <h:form id="cvSections" styleClass="removeBackground">
 		    <p:dataGrid id="sections" var="section" value="#{sectionMBean.getUserSectionsByUser(user)}" emptyMessage="Aucune section à afficher." columns="1" layout="grid" paginator="false">	
