@@ -44,6 +44,24 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @JoinColumn(name = "appearOnSearchPrivacy", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Privacy appearOnSearchPrivacy;
+    @JoinColumn(name = "addFriendPrivacy", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Privacy addFriendPrivacy;
+    @JoinColumn(name = "sendMessagePrivacy", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Privacy sendMessagePrivacy;
+    @JoinColumn(name = "sectionsPrivacy", referencedColumnName = "id")
+    @ManyToOne
+    private Privacy sectionsPrivacy;
+    @JoinColumn(name = "skillsPrivacy", referencedColumnName = "id")
+    @ManyToOne
+    private Privacy skillsPrivacy;
+    @JoinColumn(name = "globalInfoPriavcy", referencedColumnName = "id")
+    @ManyToOne
+    private Privacy globalInfoPriavcy;
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;
@@ -307,6 +325,54 @@ public class User implements Serializable {
 
     public void setCar(Boolean car) {
 	this.car = car;
+    }
+
+    public Privacy getAppearOnSearchPrivacy() {
+	return appearOnSearchPrivacy;
+    }
+
+    public void setAppearOnSearchPrivacy(Privacy appearOnSearchPrivacy) {
+	this.appearOnSearchPrivacy = appearOnSearchPrivacy;
+    }
+
+    public Privacy getAddFriendPrivacy() {
+	return addFriendPrivacy;
+    }
+
+    public void setAddFriendPrivacy(Privacy addFriendPrivacy) {
+	this.addFriendPrivacy = addFriendPrivacy;
+    }
+
+    public Privacy getSendMessagePrivacy() {
+	return sendMessagePrivacy;
+    }
+
+    public void setSendMessagePrivacy(Privacy sendMessagePrivacy) {
+	this.sendMessagePrivacy = sendMessagePrivacy;
+    }
+
+    public Privacy getSectionsPrivacy() {
+	return sectionsPrivacy;
+    }
+
+    public void setSectionsPrivacy(Privacy sectionsPrivacy) {
+	this.sectionsPrivacy = sectionsPrivacy;
+    }
+
+    public Privacy getSkillsPrivacy() {
+	return skillsPrivacy;
+    }
+
+    public void setSkillsPrivacy(Privacy skillsPrivacy) {
+	this.skillsPrivacy = skillsPrivacy;
+    }
+
+    public Privacy getGlobalInfoPriavcy() {
+	return globalInfoPriavcy;
+    }
+
+    public void setGlobalInfoPriavcy(Privacy globalInfoPriavcy) {
+	this.globalInfoPriavcy = globalInfoPriavcy;
     }
     
 }
