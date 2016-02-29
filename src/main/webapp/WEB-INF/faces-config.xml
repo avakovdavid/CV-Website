@@ -101,4 +101,22 @@
 	    <value>#{loginMBean}</value>
 	</managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>privacyMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.PrivacyManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>privacyConverter</managed-bean-name>
+	<managed-bean-class>cvpicker.managed.bean.PrivacyConverter</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+	    <property-name>privacyBean</property-name>
+	    <value>#{privacyMBean}</value>
+	</managed-property>
+    </managed-bean>
 </faces-config>

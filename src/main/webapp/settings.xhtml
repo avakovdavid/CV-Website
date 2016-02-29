@@ -38,6 +38,9 @@
     <script src="js/jquery.prettyPhoto.js"></script>
 </h:head>
 <h:body>
+    <ui:insert name="header" >
+	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
+    </ui:insert>
     <div class="color-bar-1"></div>
     <div class="color-bar-2 color-bg"></div>
     
@@ -51,7 +54,53 @@
         <div class="row">
             <div class="span8 blog">
 		<i>Ici vous pouvez gérer la confidentialité de vos données et activer/désactiver les fonctionnalités supplémentaires </i>
-		
+		<h:form id="privacy-settings">
+		    <br/>
+		    <h4>Mes données personnelles</h4>
+		    
+		    <p:outputLabel for="privacyLevels1" value="Informations globales (adresse, téléphone, site web etc) :" />
+		    <p:selectOneMenu id="privacyLevels1" value="#{loginMBean.currentUser.globalInfoPriavcy}" converter="#{privacyConverter}">
+			<f:selectItem itemLabel="Publique" itemValue="" noSelectionOption="true" />
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <p:outputLabel for="privacyLevels2" value="Les compétences :" />
+		    <p:selectOneMenu id="privacyLevels2" value="#{loginMBean.currentUser.skillsPrivacy}" converter="#{privacyConverter}">
+			<f:selectItem itemLabel="Publique" itemValue="" noSelectionOption="true" />
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <p:outputLabel for="privacyLevels3" value="Les sections de votre CV :" />
+		    <p:selectOneMenu id="privacyLevels3" value="#{loginMBean.currentUser.sectionsPrivacy}" converter="#{privacyConverter}">
+			<f:selectItem itemLabel="Publique" itemValue="" noSelectionOption="true" />
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <br/><br/>
+		    <h4>Mes fonctionnalités</h4>
+		    
+		    <p:outputLabel for="privacyLevels4" value="Qui peut m'envoyer des messages :" />
+		    <p:selectOneMenu id="privacyLevels4" value="#{loginMBean.currentUser.sendMessagePrivacy}" converter="#{privacyConverter}">
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <p:outputLabel for="privacyLevels5" value="Qui peut m'ajouter en amis :" />
+		    <p:selectOneMenu id="privacyLevels5" value="#{loginMBean.currentUser.addFriendPrivacy}" converter="#{privacyConverter}">
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <p:outputLabel for="privacyLevels6" value="Qui peut me trouver dans le moteur de recherche :" />
+		    <p:selectOneMenu id="privacyLevels6" value="#{loginMBean.currentUser.appearOnSearchPrivacy}" converter="#{privacyConverter}">
+			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
+		    </p:selectOneMenu>
+		    
+		    <br/><br/>
+		    <div class="row">
+                        <div class="span2">
+			    <p:commandButton id='submit' styleClass="btn btn-success" value="Mettre à jour" action='#{userMBean.update}' ajax='true' update="privacy-settings"/>
+                        </div>
+                    </div>
+		</h:form>
 		
             </div>
 

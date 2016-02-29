@@ -92,7 +92,7 @@ public class UserManagedBean implements Serializable {
 	    session.update(loginBean.getCurrentUser());
 	    tx.commit();
 
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a été mis à jour.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vos paramètres ont été mis à jour.", ""));
 	} catch (Exception e) {
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
 
