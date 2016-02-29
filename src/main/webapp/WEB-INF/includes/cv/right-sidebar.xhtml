@@ -58,19 +58,9 @@
                 
 		<h5 class="title-bg" style="margin-top: 0px;">Compétences</h5>
 		<div class="row"> 
-		    <h:form id="cvSkills" styleClass="removeBackground">
-			<p:dataGrid id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher." columns="2" layout="grid" paginator="false">
-			    <p:panel style="text-align:center">
-				<h:panelGrid columns="1" style="width:100%">
-				    <h6>#{skill.skill.name}</h6>
-				    <p>#{skill.description}</p>
-				    <div class="progress progress-#{skill.mark le 25 ? 'danger' : skill.mark le 50 ? 'warning' : skill.mark le 75 ? 'info' : skill.mark le 100 ? 'success' : ''} progress-striped">
-					<div class="bar" style="width: #{''.concat(skill.mark).concat('%')};">#{skill.mark}%</div>
-				    </div>
-				</h:panelGrid>
-			    </p:panel>
-			</p:dataGrid>
-		    </h:form>
+		    <ui:insert>
+			<ui:include src="/WEB-INF/includes/cv/skills.xhtml" />
+		    </ui:insert>
 		</div>
             </div>
         </div>
