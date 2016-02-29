@@ -21,19 +21,10 @@
                 <h2>#{user.lastName} #{user.firstName}</h2>
                 <p class="lead">#{cv.title}</p>
                 <p>#{cv.description}</p>
-		<h:form id="addFriendSendMsgButtons">
-		    <p>
-			<c:if test="#{user ne loginMBean.currentUser and !friendMBean.alreadyFriendWith(user)}">
-			    <p:commandButton disabled="#{user eq loginMBean.currentUser or friendMBean.alreadyFriendWith(user)}" styleClass="btn btn-large btn-success" value="Ajouter en ami" action="#{friendMBean.sendRequest}" ajax='true' update="addFriendSendMsgButtons">
-				<f:param name="id" value="#{user.id}"/>
-			    </p:commandButton>
-			</c:if>
-			<h:commandLink  id="sendMsgButton" styleClass="btn btn-large btn-info" value="Envoyer un message"  action="/messenger-new.xhtml?faces-redirect=true" >
-			    <f:setPropertyActionListener target="#{messageMBean.subject}" value=""/>
-			    <f:setPropertyActionListener target="#{messageMBean.content}" value=""/>
-			</h:commandLink>
-		    </p>
-		</h:form>
+		
+		<ui:insert>
+		    <ui:include src="/WEB-INF/includes/cv/friend-message-buttons.xhtml" />
+		</ui:insert>
 		
 		<ui:insert>
 		    <ui:include src="/WEB-INF/includes/cv/share-buttons.xhtml" />
