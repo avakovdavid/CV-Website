@@ -45,24 +45,9 @@
 	    </ui:insert>
 	</div>
 	
-	<h:form id="cvSections" styleClass="removeBackground">
-	    <p:dataGrid id="sections" var="section" value="#{sectionMBean.getUserSectionsByUser(user)}" emptyMessage="Aucune section à afficher." columns="1" layout="grid" paginator="false">	
-		<h3 class="title-bg">#{section.title}</h3>
-		 
-		    <p:dataGrid id="elements" var="element" value="#{sectionMBean.getElementsBySection(section)}" emptyMessage="Aucun élément dans la section." columns="1" layout="tabular" paginator="false">	
-			    <div class="span8">
-				<h4>#{element.title}</h4>
-				<b>#{element.description}</b><br/>
-				<i>#{element.informations}</i>
-			    </div>
-			
-			     <div class="span4" style="text-align: right;">
-				 <p>#{element.dateStart} - #{element.dateEnd}</p>
-			     </div>
-		    </p:dataGrid>
-		
-	    </p:dataGrid>
-	</h:form>
+	<ui:insert>
+	    <ui:include src="/WEB-INF/includes/cv/sections.xhtml" />
+	</ui:insert>
 	</ui:composition>
     </body>
 </html>
