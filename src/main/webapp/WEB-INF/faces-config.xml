@@ -55,7 +55,7 @@
     <managed-bean>
 	<managed-bean-name>friendMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.FriendManagedBean</managed-bean-class>
-	<managed-bean-scope>request</managed-bean-scope>
+	<managed-bean-scope>session</managed-bean-scope>
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
@@ -108,6 +108,10 @@
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
+	</managed-property>
+	<managed-property>
+	    <property-name>friendBean</property-name>
+	    <value>#{friendMBean}</value>
 	</managed-property>
     </managed-bean>
     <managed-bean>

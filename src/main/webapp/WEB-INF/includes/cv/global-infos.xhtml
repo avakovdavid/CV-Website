@@ -12,13 +12,15 @@
     
     <body>
 	<ui:composition>
-	    <p><i class="icon-envelope"></i>#{user.email}</p>
-	    <p><i class="icon-bell"></i>#{user.phoneNumber}</p>
-	    <p><a href="#{user.website}"><i class="icon-globe"></i>#{user.website}</a></p>
-	    <p><i class="icon-home"></i>#{user.address}</p>
-	    <p><i class="icon-calendar"></i>#{user.birthday}</p>
-	    <p><i class="icon-file"></i>#{user.drivingLicence ? 'Permis' : ''}</p>
-	    <p><i class="icon-road"></i>#{user.car ? 'Véhiculé' : ''}</p>
+	    <ui:fragment rendered="#{privacyMBean.isAccessibleGlobalInfoOf(user)}">
+		<p><i class="icon-envelope"></i>#{user.email}</p>
+		<p><i class="icon-bell"></i>#{user.phoneNumber}</p>
+		<p><a href="#{user.website}"><i class="icon-globe"></i>#{user.website}</a></p>
+		<p><i class="icon-home"></i>#{user.address}</p>
+		<p><i class="icon-calendar"></i>#{user.birthday}</p>
+		<p><i class="icon-file"></i>#{user.drivingLicence ? 'Permis' : ''}</p>
+		<p><i class="icon-road"></i>#{user.car ? 'Véhiculé' : ''}</p>
+	    </ui:fragment>
 	</ui:composition>
     </body>
 </html>

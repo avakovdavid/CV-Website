@@ -12,7 +12,7 @@
     
     <body>
 	<ui:composition>
-	    <h:form id="cvSections" styleClass="removeBackground">
+	    <h:form id="cvSections" styleClass="removeBackground" rendered="#{privacyMBean.isAccessibleSectionsOf(user)}">
 		<p:dataGrid id="sections" var="section" value="#{sectionMBean.getUserSectionsByUser(user)}" emptyMessage="Aucune section à afficher." columns="1" layout="grid" paginator="false">	
 		    <h3 class="title-bg">#{section.title}</h3>
 		    <p:dataGrid id="elements" var="element" value="#{sectionMBean.getElementsBySection(section)}" emptyMessage="Aucun élément dans la section." columns="1" layout="tabular" paginator="false">	

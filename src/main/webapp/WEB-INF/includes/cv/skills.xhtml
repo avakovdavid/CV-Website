@@ -12,7 +12,7 @@
     
     <body>
 	<ui:composition>
-	    <h:form id="cvSkills" styleClass="span12 removeBackground">
+	    <h:form id="cvSkills" styleClass="span12 removeBackground" rendered="#{privacyMBean.isAccessibleSkillsOf(user)}">
 		<p:dataGrid id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher." columns="4" layout="grid" paginator="false">
 		    <p:panel style="text-align:center">
 			<h:panelGrid columns="1" style="width:100%">
