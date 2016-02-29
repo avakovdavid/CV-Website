@@ -123,4 +123,9 @@
 	    <value>#{privacyMBean}</value>
 	</managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>appMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.AppManagedBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>
