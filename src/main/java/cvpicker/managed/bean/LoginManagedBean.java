@@ -131,8 +131,8 @@ public class LoginManagedBean implements Serializable {
 
 	    Map<String, String> parameterMap = (Map<String, String>) externalContext.getRequestParameterMap(); 
 	    String param = parameterMap.get("id");
-	    
-	    if(context.getViewRoot().getViewId().equals("/cv.xhtml") && param.length() > 0){
+
+	    if(context.getViewRoot().getViewId().equals("/cv.xhtml") && param != null && param.length() > 0){
 		
 	    } else {
 		context.getApplication().getNavigationHandler().handleNavigation(context, null, "/authentication.xhtml?faces-redirect=true");
