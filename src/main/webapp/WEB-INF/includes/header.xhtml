@@ -12,6 +12,7 @@
     
     <body>
 	<ui:composition>
+	    <c:set var="app" value="#{appMBean}" />
 	    <div class="row header"><!-- Begin Header -->
 
 		<!-- Logo
@@ -34,7 +35,7 @@
 		================================================== -->
 		<div class="span7 navigation">
 		    <div class="navbar hidden-phone">   
-			<h:form id="menu">
+			<h:form id="menu" rendered="#{loginMBean.currentUser ne null}">
 			<ul class="nav">
 			    <li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}">
 				<a href="index.xhtml">Accueil</a>
@@ -68,6 +69,10 @@
 			    </li>
 			    <li><h:form style="margin:50% 0;"><p:commandLink action="#{loginMBean.logout}"  title="Se déconnecter"><i class="icon-off"></i></p:commandLink></h:form></li>
 			</ul> 
+			</h:form>
+			
+			<h:form rendered="#{loginMBean.currentUser eq null}">
+			    <h:link style="margin-left:25px; margin-right:25px;" styleClass="btn btn-large btn-success" value="Se connecter/S'inscrire"  outcome="/authentication.xhtml?faces-redirect=true"/>
 			</h:form>
 		    </div>
 
