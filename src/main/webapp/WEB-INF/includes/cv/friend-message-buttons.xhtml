@@ -14,7 +14,7 @@
 	<ui:composition>
 	    <h:form id="addFriendSendMsgButtons">
 		<p>
-		    <c:if test="#{user ne loginMBean.currentUser and !friendMBean.alreadyFriendWith(user) and privacyMBean.isAccessibleAddFriendOf(user) eq true}">
+		    <c:if test="#{user ne null and user ne loginMBean.currentUser and !friendMBean.alreadyFriendWith(user) and privacyMBean.isAccessibleAddFriendOf(user) eq true}">
 			<p:commandButton disabled="#{user eq loginMBean.currentUser or friendMBean.alreadyFriendWith(user)}" styleClass="btn btn-large btn-success" value="Ajouter en ami" action="#{friendMBean.sendRequest}" ajax='true' update="addFriendSendMsgButtons">
 			    <f:param name="id" value="#{user.id}"/>
 			</p:commandButton>

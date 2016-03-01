@@ -9,7 +9,9 @@ import cvpicker.hibernate.User;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import org.hibernate.Session;
@@ -125,7 +127,16 @@ public class LoginManagedBean implements Serializable {
     public void checkLoggedIn(ComponentSystemEvent cse) {
 	FacesContext context = FacesContext.getCurrentInstance();
 	if( currentUser == null){
-	    context.getApplication().getNavigationHandler().handleNavigation(context, null, "/authentication.xhtml?faces-redirect=true");
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+	    Map<String, String> parameterMap = (Map<String, String>) externalContext.getRequestParameterMap(); 
+	    String param = parameterMap.get("id");
+	    
+	    if(context.getViewRoot().getViewId().equals("/cv.xhtml") && param.length() > 0){
+		
+	    } else {
+		context.getApplication().getNavigationHandler().handleNavigation(context, null, "/authentication.xhtml?faces-redirect=true");
+	    }
 	}
     }
     

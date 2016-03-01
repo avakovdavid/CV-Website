@@ -4,7 +4,6 @@
  */
 package cvpicker.managed.bean;
 
-import cvpicker.hibernate.Friend;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Privacy;
 import cvpicker.hibernate.User;
@@ -42,37 +41,58 @@ public class PrivacyManagedBean implements Serializable{
     }
     
     public boolean isAccessibleGlobalInfoOf(User user){
+	if(user == null){
+	    return false;
+	}
 	Privacy privacyLevel = user.getGlobalInfoPriavcy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     public boolean isAccessibleSkillsOf(User user){
+	if(user == null){
+	    return false;
+	}
 	Privacy privacyLevel = user.getSkillsPrivacy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     public boolean isAccessibleSectionsOf(User user){
+	if(user == null){
+	    return false;
+	}
 	Privacy privacyLevel = user.getSectionsPrivacy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     public boolean isAccessibleSendMessagesOf(User user){
+	if(user == null){
+	    return false;
+	}
 	Privacy privacyLevel = user.getSendMessagePrivacy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     public boolean isAccessibleAddFriendOf(User user){
+	if(user == null){
+	    return false;
+	}
 	Privacy privacyLevel = user.getAddFriendPrivacy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     public boolean isAccessibleOnSearchOf(User user){
+	if(user == null){
+	    System.out.println("search user null");
+	    return false;
+	}
 	Privacy privacyLevel = user.getAppearOnSearchPrivacy();
 	return testPrivacyAccess(user, privacyLevel);
     }
     
     private boolean testPrivacyAccess(User user, Privacy privacyLevel){
-	if(privacyLevel == null || loginBean.getCurrentUser().equals(user)){
+	if(privacyLevel == null 
+		|| (loginBean.getCurrentUser() == null && privacyLevel == null) 
+		|| (loginBean.getCurrentUser() != null && loginBean.getCurrentUser().equals(user))){
 	    return true;
 	}
 	
