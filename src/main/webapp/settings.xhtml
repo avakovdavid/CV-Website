@@ -91,6 +91,7 @@
 		    
 		    <p:outputLabel for="privacyLevels6" value="Qui peut me trouver dans le moteur de recherche :" />
 		    <p:selectOneMenu id="privacyLevels6" value="#{loginMBean.currentUser.appearOnSearchPrivacy}" converter="#{privacyConverter}">
+			<f:selectItem itemLabel="Publique" itemValue="" noSelectionOption="true" />
 			<f:selectItems var="privacy" itemLabel="#{privacy.title}" value="#{privacyMBean.privacyLevels}" />
 		    </p:selectOneMenu>
 		    
