@@ -5,7 +5,8 @@
     <body>
 	<ui:composition>
 	    <div class="span4 sidebar">
-                <h5 class="title-bg">CV les plus populaires</h5>
+		<ui:fragment rendered="#{loginMBean.currentUser ne null}">
+                <h5 class="title-bg" style="margin-top:0;">CV les plus populaires</h5>
                 <ul class="popular-posts">
                     <li>
                         <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
@@ -41,6 +42,7 @@
                         <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
                     </ul>
                 </div>
+		</ui:fragment>
             </div>
 	</ui:composition>
     </body>

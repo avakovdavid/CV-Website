@@ -79,7 +79,7 @@ public class SectionManagedBean implements Serializable{
 	criteria.addOrder(Order.asc("position"));	
 	
 	result = criteria.list();
-	
+
 	session.close();
 	return result; 
     }
@@ -355,6 +355,20 @@ public class SectionManagedBean implements Serializable{
     
     public List<Element> getElementsBySection(Section section){
 	return sectionsHashMap.get(section);
+    }
+    
+    public List<Element> getElementsBySectionFromDatabase(Section section){
+	List<Element> result;
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	
+	Criteria criteria = session.createCriteria(Element.class);
+	criteria.add(Restrictions.eq("section", section));
+	criteria.addOrder(Order.asc("position"));
+	
+	result = criteria.list();
+	
+	return result;
     }
     
     public void prepareElementDialog(Section section){

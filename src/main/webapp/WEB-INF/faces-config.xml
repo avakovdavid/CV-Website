@@ -9,7 +9,7 @@
     <managed-bean>
 	<managed-bean-name>userMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.UserManagedBean</managed-bean-class>
-	<managed-bean-scope>request</managed-bean-scope>
+	<managed-bean-scope>session</managed-bean-scope>
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
@@ -55,7 +55,7 @@
     <managed-bean>
 	<managed-bean-name>friendMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.FriendManagedBean</managed-bean-class>
-	<managed-bean-scope>request</managed-bean-scope>
+	<managed-bean-scope>session</managed-bean-scope>
 	<managed-property>
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
@@ -100,5 +100,32 @@
 	    <property-name>loginBean</property-name>
 	    <value>#{loginMBean}</value>
 	</managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>privacyMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.PrivacyManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+	    <property-name>loginBean</property-name>
+	    <value>#{loginMBean}</value>
+	</managed-property>
+	<managed-property>
+	    <property-name>friendBean</property-name>
+	    <value>#{friendMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+	<managed-bean-name>privacyConverter</managed-bean-name>
+	<managed-bean-class>cvpicker.managed.bean.PrivacyConverter</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+	    <property-name>privacyBean</property-name>
+	    <value>#{privacyMBean}</value>
+	</managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>appMBean</managed-bean-name>
+        <managed-bean-class>cvpicker.managed.bean.AppManagedBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 </faces-config>

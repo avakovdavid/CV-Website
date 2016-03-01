@@ -72,7 +72,7 @@
     </script>
 </h:head>
 <body class="home">
-    
+    <c:set var="app" value="#{appMBean}" />
     <ui:insert name="header" >
 	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
     </ui:insert>
@@ -89,6 +89,16 @@
         ================================================== -->
         <div class="span5 logo">
             <a href="./"><img src="img/logo.png" alt="" /></a>
+	    <h5>
+		<div class="input-append">
+		    <h:form id="searchForm" >
+			<p:inputText id="querryString" size="10" type="text" placeholder="Recherche" value="#{searchMBean.query}"/>
+			<p:commandButton action="#{searchMBean.doSearch}" styleClass="btn btn-small" icon="ui-icon-search" title="Rechercher" oncomplete="$('#querryString').text = '';">
+
+			</p:commandButton>
+		    </h:form>
+		</div>
+	    </h5>
         </div>
         
       </div><!-- End Header -->

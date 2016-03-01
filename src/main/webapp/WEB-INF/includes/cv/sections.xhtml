@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    
+    <body>
+	<ui:composition>
+	    <h:form id="cvSections" styleClass="removeBackground" rendered="#{privacyMBean.isAccessibleSectionsOf(user)}">
+		<p:dataGrid id="sections" var="section" value="#{sectionMBean.getUserSectionsByUser(user)}" emptyMessage="Aucune section à afficher." columns="1" layout="grid" paginator="false">	
+		    <h3 class="title-bg">#{section.title}</h3>
+		    <p:dataGrid id="elements" var="element" value="#{sectionMBean.getElementsBySectionFromDatabase(section)}" emptyMessage="Aucun élément dans la section." columns="1" layout="tabular" paginator="false">	
+			<div class="span8">
+			    <h4>#{element.title}</h4>
+			    <b>#{element.description}</b><br/>
+			    <i>#{element.informations}</i>
+			</div>
+
+			 <div class="span4" style="text-align: right;">
+			     <p>#{element.dateStart} - #{element.dateEnd}</p>
+			 </div>
+		    </p:dataGrid>
+		</p:dataGrid>
+	    </h:form>
+	</ui:composition>
+    </body>
+</html>

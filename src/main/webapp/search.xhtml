@@ -7,7 +7,6 @@
      xmlns:c="http://java.sun.com/jsp/jstl/core">  
 
 <h:head>
-    <f:event listener="#{loginMBean.checkLoggedIn}" type="preRenderView" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Recherche - CVPicker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -57,26 +56,29 @@
 		    <p:dataList id="result" value="#{searchMBean.result}" var="result" type="unordered" itemType="none" paginator="true" rows="10" 
 				    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Aucune résultat trouvé.">
-			<article class="clearfix">
-			    <h:link outcome="/cv.xhtml?faces-redirect=true">
-				<f:param name="id" value="#{result.id}" />
-				<img src="img/gallery/gallery-img-1-4col.jpg" alt="Post Thumb" class="align-left"/>
-			    </h:link>
-			    <h4 class="title-bg"><a href="cv.xhtml?id=#{result.id}">#{result.firstName} #{result.lastName}</a></h4>
-			    <p>#{result.cv.title}</p>
-			    
-			    <h:link styleClass="btn btn-mini btn-inverse" value="Voir ce CV"  outcome="/cv.xhtml?faces-redirect=true">
-				<f:param name="id" value="#{result.id}" />
-			    </h:link>
+			
+			<ui:fragment rendered="#{privacyMBean.isAccessibleOnSearchOf(result)}">
+			    <article class="clearfix">
+				<h:link outcome="/cv.xhtml?faces-redirect=true">
+				    <f:param name="id" value="#{result.id}" />
+				    <img src="img/gallery/gallery-img-1-4col.jpg" alt="Post Thumb" class="align-left"/>
+				</h:link>
+				<h4 class="title-bg"><a href="cv.xhtml?id=#{result.id}">#{result.firstName} #{result.lastName}</a></h4>
+				<p>#{result.cv.title}</p>
 
-			    <div class="post-summary-footer">
-				<ul class="post-data-3">    
-				    <li><i class="icon-calendar"></i> 09/04/15</li>
-				    <li><i class="icon-comment"></i> <a href="#">5 Commentaires</a></li>
-				    <li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
-				</ul>
-			    </div>
-			</article>
+				<h:link styleClass="btn btn-mini btn-inverse" value="Voir ce CV"  outcome="/cv.xhtml?faces-redirect=true">
+				    <f:param name="id" value="#{result.id}" />
+				</h:link>
+
+				<div class="post-summary-footer">
+				    <ul class="post-data-3">    
+					<li><i class="icon-calendar"></i> 09/04/15</li>
+					<li><i class="icon-comment"></i> <a href="#">5 Commentaires</a></li>
+					<li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
+				    </ul>
+				</div>
+			    </article>
+			</ui:fragment>
 		    </p:dataList>
 		</h:form>
 	    </div>

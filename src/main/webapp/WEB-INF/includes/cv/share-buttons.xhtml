@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'
+     xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:f='http://java.sun.com/jsf/core'
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    
+    <body>
+	<ui:composition>
+	    <c:set var="url" value="#{facesContext.externalContext.requestScheme}://#{facesContext.externalContext.requestServerName}:#{facesContext.externalContext.requestServerPort}#{facesContext.externalContext.requestContextPath}/cv.xhtml?id=#{user.id}" />
+	    <div class="row">
+		<ul class="social-icons">
+		    Partagez ce CV sur les réseaux sociaux :<br/>
+		    <li><a href="https://www.facebook.com/share.php?u=#{url}&amp;title=CVPicker - #{user.firstName} #{user.lastName}" class="social-icon facebook" target="_blank" ></a></li>
+		    <li><a href="http://twitter.com/intent/tweet?status=CVPicker - #{user.firstName} #{user.lastName} #{url}" target="_blank" class="social-icon twitter"></a></li>
+		    <li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=#{url}&amp;title=CVPicker - #{user.firstName} #{user.lastName}" target="_blank" class="social-icon linkedin"></a></li>
+		</ul>
+	    </div>
+	</ui:composition>
+    </body>
+</html>

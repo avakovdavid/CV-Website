@@ -52,9 +52,9 @@
 	<c:set var="user" value="#{id.length() > 0 ? userMBean.getUserById(id) : loginMBean.currentUser }" />
 	<c:set var="cv" value="#{user.cv}" />
 	#{messageMBean.setToU(user)}
-	
+
 	<ui:insert name="header" >
-	    <ui:include src="/WEB-INF/includes/cv/#{cv.template}.xhtml" />
+	    <ui:include src="/WEB-INF/includes/cv/#{cv.template ? cv.template : 'full-width'}.xhtml" />
 	</ui:insert>
     </div>
 
