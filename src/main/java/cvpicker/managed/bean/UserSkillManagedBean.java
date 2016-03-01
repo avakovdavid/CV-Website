@@ -10,6 +10,7 @@ import cvpicker.hibernate.User;
 import cvpicker.hibernate.UserSkill;
 import cvpicker.hibernate.UserSkillPK;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -103,6 +104,8 @@ public class UserSkillManagedBean implements Serializable{
 		session.save(userSkill);
 		skills.add(userSkill);
 		
+		loginBean.getCurrentUser().setLastEditionDate(new Date());
+
 		session.update(loginBean.getCurrentUser());
 		tx.commit();
 		
@@ -133,6 +136,8 @@ public class UserSkillManagedBean implements Serializable{
 	    session.delete(userSkill);
 	    
 	    skills.remove(userSkill);
+	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
 	    
 	    session.update(loginBean.getCurrentUser());
 	    tx.commit();
@@ -182,6 +187,9 @@ public class UserSkillManagedBean implements Serializable{
 		s.setPosition(s.getPosition()+1);
 		session.update("position", s);
 	    }
+	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
 	    
 	    tx.commit();	    
 	} catch (Exception e) {

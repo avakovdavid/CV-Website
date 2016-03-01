@@ -6,6 +6,7 @@ import cvpicker.hibernate.Privacy;
 import cvpicker.hibernate.User;
 import java.io.Serializable;
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -60,6 +61,7 @@ public class UserManagedBean implements Serializable {
 	    user.setCv(cv);
 	    user.setAddFriendPrivacy(defaultPrivacy);
 	    user.setSendMessagePrivacy(defaultPrivacy);
+	    user.setLastEditionDate(new Date());
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", ""));
@@ -96,6 +98,7 @@ public class UserManagedBean implements Serializable {
 	Transaction tx = null;
 	try {
 	    tx = session.beginTransaction();
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
 	    session.update(loginBean.getCurrentUser());
 	    tx.commit();
 

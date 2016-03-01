@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -44,6 +45,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "lastEditionDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastEditionDate;
     @JoinColumn(name = "appearOnSearchPrivacy", referencedColumnName = "id")
     @ManyToOne
     private Privacy appearOnSearchPrivacy;
@@ -373,6 +379,14 @@ public class User implements Serializable {
 
     public void setGlobalInfoPriavcy(Privacy globalInfoPriavcy) {
 	this.globalInfoPriavcy = globalInfoPriavcy;
+    }
+
+    public Date getLastEditionDate() {
+	return lastEditionDate;
+    }
+
+    public void setLastEditionDate(Date lastEditionDate) {
+	this.lastEditionDate = lastEditionDate;
     }
     
 }

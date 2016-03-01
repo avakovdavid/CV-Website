@@ -99,7 +99,8 @@ public class SectionManagedBean implements Serializable{
 	    session.save(section);
 	    sections.add(section);
 	    sectionsHashMap.put(section, new ArrayList<Element>());
-	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+
 	    session.update(getLoginBean().getCurrentUser());
 	    tx.commit();
 
@@ -132,6 +133,7 @@ public class SectionManagedBean implements Serializable{
 	    
 	    sectionsHashMap.remove(section);
 	    sections.remove(section);
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
 	    
 	    session.update(getLoginBean().getCurrentUser());
 	    tx.commit();
@@ -182,6 +184,9 @@ public class SectionManagedBean implements Serializable{
 		session.update("position", s);
 	    }
 	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
+	    
 	    tx.commit();	    
 	} catch (Exception e) {
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
@@ -213,6 +218,9 @@ public class SectionManagedBean implements Serializable{
 	    session.save(element);
 	    sectionsHashMap.get(sectionWhereAddElement).add(element);
 	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
+	    
 	    tx.commit();
 
 	    RequestContext.getCurrentInstance().execute("PF('newElementDialog').hide()");
@@ -240,6 +248,9 @@ public class SectionManagedBean implements Serializable{
 	    session.delete(element);
 	    
 	    sectionsHashMap.get(section).remove(element);
+	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
 	    
 	    tx.commit();
 	    
@@ -291,6 +302,9 @@ public class SectionManagedBean implements Serializable{
 		e.setPosition(e.getPosition()+1);
 		session.update("position", e);
 	    }
+	    
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
 	    
 	    tx.commit();	    
 	} catch (Exception e) {

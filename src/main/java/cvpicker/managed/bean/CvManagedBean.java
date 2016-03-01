@@ -3,6 +3,7 @@ package cvpicker.managed.bean;
 import cvpicker.hibernate.Cv;
 import cvpicker.hibernate.HibernateUtil;
 import java.io.Serializable;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -44,6 +45,8 @@ public class CvManagedBean implements Serializable{
 
 	    tx = session.beginTransaction();
 	    session.update(cv);
+	    loginBean.getCurrentUser().setLastEditionDate(new Date());
+	    session.update("lastEditionDate", loginBean.getCurrentUser());
 	    tx.commit();
 	    
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Le CV a bien été mis à jour.", ""));
