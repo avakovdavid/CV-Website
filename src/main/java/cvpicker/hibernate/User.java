@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
     @JoinColumn(name = "appearOnSearchPrivacy", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Privacy appearOnSearchPrivacy;
     @JoinColumn(name = "addFriendPrivacy", referencedColumnName = "id")
     @ManyToOne(optional = false)
