@@ -113,11 +113,11 @@ public class SectionManagedBean implements Serializable{
 	    tx.commit();
 
 	    RequestContext.getCurrentInstance().execute("PF('newSectionDialog').hide()");
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Une nouvelle séction a été ajoutée dans votre liste.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Une nouvelle section a Ã©tÃ© ajoutÃ©e dans votre liste.", ""));
 
 	    resetNewSectionValues();
 	}  catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -153,10 +153,10 @@ public class SectionManagedBean implements Serializable{
 	    session.update(getLoginBean().getCurrentUser());
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La séction '" + section.getTitle() + "' a bien été supprimé de la liste.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La sÃ©ction '" + section.getTitle() + "' a bien Ã©tÃ© supprimÃ© de la liste.", ""));
 	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -208,7 +208,7 @@ public class SectionManagedBean implements Serializable{
 	    
 	    tx.commit();	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -246,12 +246,12 @@ public class SectionManagedBean implements Serializable{
 	    tx.commit();
 
 	    RequestContext.getCurrentInstance().execute("PF('newElementDialog').hide()");
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Un nouvel élément a bien été ajouté dans la séction \"" + sectionWhereAddElement.getTitle() + "\".", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Un nouvel Ã©lÃ©ment a bien Ã©tÃ© ajoutÃ© dans la sÃ©ction \"" + sectionWhereAddElement.getTitle() + "\".", ""));
 
 	    resetNewElementValues();
 	}  catch (Exception e) {
 	    System.out.println(e);
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -281,9 +281,9 @@ public class SectionManagedBean implements Serializable{
 	    
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "L'élément '" + element.getTitle() + "' a bien été supprimé de la séction '" + section.getTitle() + "'.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "L'Ã©lÃ©ment '" + element.getTitle() + "' a bien Ã©tÃ© supprimÃ© de la sÃ©ction '" + section.getTitle() + "'.", ""));
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -339,7 +339,7 @@ public class SectionManagedBean implements Serializable{
 	    
 	    tx.commit();	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();

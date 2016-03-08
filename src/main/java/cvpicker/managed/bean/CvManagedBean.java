@@ -60,10 +60,10 @@ public class CvManagedBean implements Serializable{
 	    session.update("lastEditionDate", loginBean.getCurrentUser());
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Le CV a bien été mis à jour.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Le CV a bien Ã©tÃ© mis Ã  jour.", ""));
 	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();

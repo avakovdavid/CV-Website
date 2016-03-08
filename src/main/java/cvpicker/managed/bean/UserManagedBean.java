@@ -63,7 +63,7 @@ public class UserManagedBean implements Serializable {
 	try {
 	    User testUser = (User) session.createCriteria(User.class).add(Restrictions.eq("email", email)).uniqueResult();
 	    if(testUser != null){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "L'utilisateur avec l'adresse '"+email+"' existe déjà", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "L'utilisateur avec l'adresse '"+email+"' existe dÃ©jÃ ", ""));
 		return ;
 	    }
 	    Cv cv = new Cv();
@@ -82,7 +82,7 @@ public class UserManagedBean implements Serializable {
 	    user.setLastEditionDate(new Date());
 	    
 	    if(!getPassword().equals(getPasswordRepeat())){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mot de passes doivent être identiques", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Les deux mots de passe doivent Ãªtre identiques", ""));
 		return ;
 	    }
 	    
@@ -97,11 +97,11 @@ public class UserManagedBean implements Serializable {
 	    session.save(user);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a bien été créé.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre profil a bien Ã©tÃ© crÃ©Ã©.", ""));
 	    
 	    loginBean.setCurrentUser(user);	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -123,9 +123,9 @@ public class UserManagedBean implements Serializable {
 	    session.update(loginBean.getCurrentUser());
 	    tx.commit();
 
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vos paramètres ont été mis à jour.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vos paramÃ¨tres ont Ã©tÃ© mis Ã  jour.", ""));
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();

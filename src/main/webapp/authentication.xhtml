@@ -73,7 +73,8 @@
     </script>
 </h:head>
 <body class="home">
-    <c:set var="app" value="#{appMBean}" />
+    #{appMBean.test()}
+    <c:set var="app" value="#{appMBean.test()}" />
     <ui:insert name="header" >
 	<ui:include src="/WEB-INF/includes/ajax_status_and_msgs_area.xhtml" />
     </ui:insert>

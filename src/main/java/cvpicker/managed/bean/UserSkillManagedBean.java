@@ -79,7 +79,7 @@ public class UserSkillManagedBean implements Serializable{
 	try {
 	    tx = session.beginTransaction();
 	    
-	    //VÈrifier si la compÈtence qu'on ajoute existe dÈj‡ dans la base
+	    //V√©rifier si la comp√©tence qu'on ajoute existe d√©j√† dans la base
 	    Criteria criteria = session.createCriteria(Skill.class);
 	    criteria.add(Restrictions.eq("name", skillName));
 	    Skill skill = (Skill)criteria.uniqueResult();
@@ -92,7 +92,7 @@ public class UserSkillManagedBean implements Serializable{
 		tx.begin();
 	    }
 	    
-	    //VÈrifier si l'utilisateur a dÈj‡ indiquÈ avoir cette compÈtence 
+	    //V√©rifier si l'utilisateur a d√©j√† indiqu√© avoir cette comp√©tence 
 	    criteria = session.createCriteria(UserSkill.class);
 	    criteria.add(Restrictions.eq("user", loginBean.getCurrentUser()));
 	    criteria.add(Restrictions.eq("skill", skill));
@@ -118,14 +118,14 @@ public class UserSkillManagedBean implements Serializable{
 		tx.commit();
 		
 		RequestContext.getCurrentInstance().execute("PF('newSkillDialog').hide()");
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Une nouvelle compÈtence a ÈtÈ ajoutÈe dans votre liste.", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Une nouvelle comp√©tence a √©t√© ajout√©e dans votre liste.", ""));
 		
 		resetNewSkillValues();
 	    } else {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Les doublons ne sont pas autorisÈs.", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Les doublons ne sont pas autoris√©s.", ""));
 	    }
 	}  catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problËme est survenu sur le serveur. Veuillez rÈessayer ultÈrieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un probl√®me est survenu sur le serveur. Veuillez r√©essayer ult√©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -154,10 +154,10 @@ public class UserSkillManagedBean implements Serializable{
 	    session.update(loginBean.getCurrentUser());
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, userSkill.getSkill().getName() + " a bien ÈtÈ supprimÈ de la liste.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, userSkill.getSkill().getName() + " a bien √©t√© supprim√© de la liste.", ""));
 	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problËme est survenu sur le serveur. Veuillez rÈessayer ultÈrieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un probl√®me est survenu sur le serveur. Veuillez r√©essayer ult√©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -209,7 +209,7 @@ public class UserSkillManagedBean implements Serializable{
 	    
 	    tx.commit();	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problËme est survenu sur le serveur. Veuillez rÈessayer ultÈrieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un probl√®me est survenu sur le serveur. Veuillez r√©essayer ult√©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();

@@ -27,7 +27,7 @@ public class AppManagedBean implements Serializable{
 	    Criteria criteria = session.createCriteria(Privacy.class);
 	    if(criteria.list().isEmpty()){
 		tx = session.beginTransaction();
-		session.save(new Privacy(1, "connected_user", "Utilisateurs connectés"));
+		session.save(new Privacy(1, "connected_user", "Utilisateurs connectÃ©s"));
 		session.save(new Privacy(2, "friend", "Amis"));
 		session.save(new Privacy(3, "none", "Personne"));
 		tx.commit();
@@ -39,5 +39,9 @@ public class AppManagedBean implements Serializable{
 	} finally {
 	    session.close();
 	}
+    }
+    
+    public void test() {
+        System.err.println("MY TEST");
     }
 }

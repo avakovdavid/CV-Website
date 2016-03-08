@@ -86,11 +86,11 @@ public class FriendManagedBean  implements Serializable{
 	    session.persist(friend);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, userToAccepte.getFirstName() + " " + userToAccepte.getLastName() + " a été ajouté dans votre liste.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, userToAccepte.getFirstName() + " " + userToAccepte.getLastName() + " a ete ajoute dans votre liste.", ""));
 	    friendRequestsCounter--;
 	    friendsCounter++;
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -136,7 +136,7 @@ public class FriendManagedBean  implements Serializable{
 		
 	try {	
 	    if(userA.equals(userB)){
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vous ne pouvez pas vous ajouter vous-mêmes.", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vous ne pouvez pas vous ajouter vous-mÃªme.", ""));
 		return ;
 	    }
 	    
@@ -152,11 +152,11 @@ public class FriendManagedBean  implements Serializable{
 	    
 	    if(friend != null) {
 		if(friend.getUserA().equals(userA) && !friend.getAccepted()){
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La demande a déjà été envoyée mais n'a pas encore été acceptée.", ""));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La demande a dÃ©jÃ  Ã©tÃ© envoyÃ©e mais n'a pas encore Ã©tÃ© acceptÃ©e.", ""));
 		} else if(friend.getUserA().equals(userB) && !friend.getAccepted()){
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Répondez à la demande d'ajout.", ""));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "RÃ©pondez Ã  la demande d'ajout.", ""));
 		} else {
-		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous êtes déjà amis.", ""));
+		    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vous Ãªtes dÃ©jÃ  amis.", ""));
 		}
 		
 		return ;
@@ -171,10 +171,10 @@ public class FriendManagedBean  implements Serializable{
 	    session.save(friend);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La demande a été envoyée à " + userB.getFirstName() + " " + userB.getLastName() + ".", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La demande a Ã©tÃ© envoyÃ©e Ã  " + userB.getFirstName() + " " + userB.getLastName() + ".", ""));
 	    
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 
 	    if (tx != null) {
 		tx.rollback();
@@ -210,14 +210,14 @@ public class FriendManagedBean  implements Serializable{
 	    session.delete(friend);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, friendToRemove.getFirstName() + " " + friendToRemove.getLastName() + " a bien été retiré de la liste.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, friendToRemove.getFirstName() + " " + friendToRemove.getLastName() + " a bien Ã©tÃ© retirÃ© de la liste.", ""));
 	    if(friend.getAccepted()){
 		friendsCounter--;
 	    } else {
 		friendRequestsCounter--;
 	    }
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. " + friendToRemove.getFirstName() + " " + friendToRemove.getLastName() + " n'a pas pu être retiré de la liste d'amis.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. " + friendToRemove.getFirstName() + " " + friendToRemove.getLastName() + " n'a pas pu Ãªtre retirÃ© de la liste d'amis.", ""));
 	    if (tx != null) {
 		tx.rollback();
 	    }
