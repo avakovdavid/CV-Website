@@ -25,5 +25,6 @@
     <mapping class="cvpicker.hibernate.Section"/>
     <mapping class="cvpicker.hibernate.Element"/>
     <mapping class="cvpicker.hibernate.Privacy"/>
+    <mapping class="cvpicker.hibernate.Consulter"/>
   </session-factory>
 </hibernate-configuration>
