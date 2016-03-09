@@ -10,11 +10,13 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 
@@ -26,6 +28,26 @@ public class LoginManagedBean implements Serializable {
     private String password;
     private User currentUser = null;
     
+    
+    @PreDestroy
+    public void cleanUp() throws Exception {
+	if(currentUser != null){
+	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    Transaction tx = null;
+	    try {
+		tx = session.beginTransaction();
+		currentUser.setConnected(false);
+		session.update(currentUser);
+		tx.commit();
+	    } catch (Exception e) {
+		if (tx != null) {
+		    tx.rollback();
+		}
+	    } finally {
+		session.close();
+	    }
+	}
+    }
     
     /**
      * Getter for the email address
@@ -102,6 +124,18 @@ public class LoginManagedBean implements Serializable {
 	} else { 
 	    //user found
 	    setCurrentUser(user);
+	    
+	    Transaction tx = null;
+	    try {
+		tx = session.beginTransaction();
+		currentUser.setConnected(true);
+		session.update(currentUser);
+		tx.commit();
+	    } catch (Exception e) {
+		if (tx != null) {
+		    tx.rollback();
+		}
+	    }
 	}
 	
 	session.close();
@@ -112,12 +146,29 @@ public class LoginManagedBean implements Serializable {
      * @return authentication page to redirect on after
      */
     public String logout() {
-         setCurrentUser(null);
-         email = "";
-         password = "";
-          
-         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-         return "/authentication.xhtml?faces-redirect=true";
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	try {
+	    tx = session.beginTransaction();
+	    currentUser.setConnected(false);
+	    session.update(currentUser);
+	    tx.commit();
+	    
+	    setCurrentUser(null);
+	    email = "";
+	    password = "";
+
+	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	    return "/authentication.xhtml?faces-redirect=true";
+	} catch (Exception e) {
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	} finally {
+	    session.close();
+	}
+	
+	return "";
     }
     
     /**

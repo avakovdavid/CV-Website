@@ -45,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @Column(name = "connected")
+    private boolean connected;
     @Basic(optional = false)
     @NotNull
     @Column(name = "lastEditionDate")
@@ -387,6 +389,14 @@ public class User implements Serializable {
 
     public void setLastEditionDate(Date lastEditionDate) {
 	this.lastEditionDate = lastEditionDate;
+    }
+
+    public boolean getConnected() {
+	return connected;
+    }
+
+    public void setConnected(boolean connected) {
+	this.connected = connected;
     }
     
 }
