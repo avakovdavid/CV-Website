@@ -251,6 +251,34 @@ public class FriendManagedBean  implements Serializable{
 	
 	return result;
     }
+    
+    public List<User> getConnectedList(){
+	List<User> result = new ArrayList<User>();
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Criteria criteria = session.createCriteria(Friend.class);
+	criteria.add(Restrictions.or(
+		Restrictions.eq("userA", getLoginBean().getCurrentUser()),
+		Restrictions.eq("userB", getLoginBean().getCurrentUser())));
+	criteria.add(Restrictions.eq("accepted", true));
+	List<Friend>  friendList = criteria.list();
+	
+	for(Friend f : friendList){
+	    if(getLoginBean().getCurrentUser().getId().equals(f.getUserA().getId())){
+		if(f.getUserB().getConnected()){
+		    result.add(f.getUserB());
+		}
+	    }else{
+		if(f.getUserA().getConnected()){
+		    result.add(f.getUserA());
+		}
+	    }
+	}
+	
+	session.close();
+	
+	return result;
+    }
 
     /**
      * @return the loginBean
