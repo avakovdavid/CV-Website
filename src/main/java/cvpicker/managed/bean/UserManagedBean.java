@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -117,6 +119,16 @@ public class UserManagedBean implements Serializable {
     public List<User> getUsers() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	List<User>  userList = session.createCriteria(User.class).list();
+	return userList;
+    }
+    
+    public List<User> getPopularUsers(){
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Criteria criteria = session.createCriteria(User.class).createCriteria("cv");
+	criteria.addOrder(Order.desc("views"));
+	criteria.setMaxResults(5);
+	
+	List<User> userList = criteria.list();
 	return userList;
     }
     

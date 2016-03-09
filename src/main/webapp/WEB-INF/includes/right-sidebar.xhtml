@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'
+      xmlns:h='http://java.sun.com/jsf/html'
+     xmlns:p="http://primefaces.org/ui"
      xmlns:ui="http://java.sun.com/jsf/facelets">  
 
     <body>
 	<ui:composition>
 	    <div class="span4 sidebar">
 		<ui:fragment rendered="#{loginMBean.currentUser ne null}">
-                <h5 class="title-bg" style="margin-top:0;">CV les plus populaires</h5>
-                <ul class="popular-posts">
-                    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-                    </li>
-                    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-		    </li>
-                    <li>
-                        <a href="blog-single.htm"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="Popular Post"/></a>
-                        <h6><a href="#">David AVAKOV</a></h6>
-                        <em>09/01/15</em>
-                    </li>
-                </ul>
+		    <div class ="row">   
+			<div class ="span4"> 
+			    <h5 class="title-bg" style="margin-top:0;">CV les plus populaires</h5>
+		
+			    <h:form id="popularProfil" styleClass="removeBackground">
+				<p:dataList  styleClass="popular-posts" value="#{userMBean.getPopularUsers()}" var="user" type="unordered" itemType="none" paginator="false"
+					emptyMessage="">
+				    <a href="cv.xhtml?id=#{user.id}"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="CV Populaire"/></a>
+				    <h6><a href="cv.xhtml?id=#{user.id}">#{user.firstName} #{user.lastName}</a></h6>
+				    <em><i class="icon-eye-open"></i> #{user.cv.views}</em>
+				</p:dataList>
+			    </h:form>
+			</div>
+		    </div>
 
-                <h5 class="title-bg">Amis</h5>
-                <div class="footer-col">
-                    <ul class="img-feed">
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                        <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
-                    </ul>
-                </div>
+		    <h5 class="title-bg">Amis</h5>
+		    <div class="footer-col">
+			<ul class="img-feed">
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			    <li><a href="#"><img src="img/gallery/flickr-img-1.jpg" alt="Image Feed"/></a></li>
+			</ul>
+		    </div>
 		</ui:fragment>
             </div>
 	</ui:composition>
