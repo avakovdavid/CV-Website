@@ -4,17 +4,31 @@ import cvpicker.hibernate.Cv;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Privacy;
 import cvpicker.hibernate.User;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import javax.imageio.stream.FileImageInputStream;
+import javax.servlet.ServletContext;
+import org.apache.commons.io.IOUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -32,6 +46,8 @@ public class UserManagedBean implements Serializable {
     private String email;
     private String password;
     private String passwordRepeat;
+    
+    private StreamedContent photoByUser;
     
     private LoginManagedBean loginBean;
     
@@ -105,6 +121,61 @@ public class UserManagedBean implements Serializable {
 	    tx.commit();
 
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Vos paramètres ont été mis à jour.", ""));
+	} catch (Exception e) {
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	} finally {
+	    session.close();
+	}
+    }
+    
+    public StreamedContent getPhotoByUser() throws FileNotFoundException, IOException{
+	FacesContext context = FacesContext.getCurrentInstance();
+	
+	if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+            String userId = context.getExternalContext().getRequestParameterMap().get("userId");
+	    	    
+	    User user = getUserById(Integer.parseInt(userId));
+	    
+	    if(user.getPhotoOriginal() == null){
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		String img = servletContext.getRealPath("")+ File.separator 
+		+ "img" + File.separator 
+		+ "gallery" + File.separator 
+		+ "gallery-img-1-4col-cir.jpg";
+		
+		File f = new File(img);
+		FileImageInputStream stream = new FileImageInputStream(f);
+		
+		byte[] b = IOUtils.toByteArray(new FileInputStream(f));
+		
+		return new DefaultStreamedContent(new ByteArrayInputStream(b), "image/png");
+	    }
+	    
+	    InputStream is = new ByteArrayInputStream(user.getPhotoOriginal());
+
+	    return new DefaultStreamedContent(is, "image/png");
+	}
+    }
+    
+    public void upload(FileUploadEvent event) throws IOException {
+	UploadedFile uploadedFile = event.getFile();
+	byte [] uploadedFileIS = uploadedFile.getContents();	
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	try {
+	    tx = session.beginTransaction();
+	    loginBean.getCurrentUser().setPhotoOriginal(uploadedFileIS);
+	    session.update(loginBean.getCurrentUser());
+	    tx.commit();
+	    //photoByUser.setBytes(loginBean.getCurrentUser().getPhotoOriginal());
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre photo a bien été chargée.", ""));
 	} catch (Exception e) {
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
 
