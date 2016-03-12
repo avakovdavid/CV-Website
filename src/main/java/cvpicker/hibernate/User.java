@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -45,6 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
+    @Lob
+    @Column(name = "photoOriginal")
+    private byte[] photoOriginal;
     @Column(name = "connected")
     private boolean connected;
     @Basic(optional = false)
@@ -397,6 +401,14 @@ public class User implements Serializable {
 
     public void setConnected(boolean connected) {
 	this.connected = connected;
+    }
+
+    public byte[] getPhotoOriginal() {
+	return photoOriginal;
+    }
+
+    public void setPhotoOriginal(byte[] photoOriginal) {
+	this.photoOriginal = photoOriginal;
     }
     
 }
