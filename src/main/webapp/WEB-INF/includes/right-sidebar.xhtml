@@ -2,6 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml'
       xmlns:h='http://java.sun.com/jsf/html'
      xmlns:p="http://primefaces.org/ui"
+     xmlns:f='http://java.sun.com/jsf/core'
      xmlns:ui="http://java.sun.com/jsf/facelets">  
 
     <body>
@@ -15,7 +16,13 @@
 			    <h:form id="popularProfil" styleClass="removeBackground">
 				<p:dataList  styleClass="popular-posts" value="#{userMBean.getPopularUsers()}" var="user" type="unordered" itemType="none" paginator="false"
 					emptyMessage="">
-				    <a href="cv.xhtml?id=#{user.id}"><img src="img/gallery/gallery-img-2-thumb.jpg" alt="CV Populaire"/></a>
+				    <a href="cv.xhtml?id=#{user.id}" >
+					<p class="custom-thumbnail align-left">
+					    <p:graphicImage value="#{userMBean.photoByUser}" alt="#{user.firstName} #{user.lastName}">
+						<f:param name="userId" value="#{user.id}"/>
+					    </p:graphicImage>
+					</p>
+				    </a>
 				    <h6><a href="cv.xhtml?id=#{user.id}">#{user.firstName} #{user.lastName}</a></h6>
 				    <em><i class="icon-eye-open"></i> #{user.cv.views}</em>
 				</p:dataList>
@@ -28,7 +35,11 @@
 			<h:form id="connectedFriends" styleClass="removeBackground">
 			    <p:dataList  styleClass="img-feed" value="#{friendMBean.getConnectedList()}" var="user" type="unordered" itemType="none" paginator="false"
 				    emptyMessage="">
-			       <a href="cv.xhtml?id=#{user.id}"><img src="img/gallery/flickr-img-1.jpg" alt="#{user.firstName} #{user.lastName}"/></a>
+				<p class="custom-thumbnail align-left">
+				    <p:graphicImage value="#{userMBean.photoByUser}" alt="#{user.firstName} #{user.lastName}">
+					<f:param name="userId" value="#{user.id}"/>
+				    </p:graphicImage>
+				</p>
 			    </p:dataList>
 			</h:form>
 		    </div>
