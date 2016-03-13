@@ -56,15 +56,16 @@
 		<i>Ici vous pouvez modifier les informations globales de votre profil </i>
 		<h:form id="cropper" enctype="multipart/form-data">
 		    <p:growl id="msgs" showDetail="true"/>
-		    <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{cropperMBean.upload}" auto="true" skinSimple="false" 
-			dragDropSupport="false" update="msgs cropper cropper" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
-		    <h:panelGrid columns="2">
-			<!--<p:imageCropper value="#{cropperMBean.croppedImage}" image="/resources/img/blog-med-img-1.jpg" initialCoords="225,75,300,125"/>-->
-			<p:imageCropper value="#{cropperMBean.croppedImage}" image="/resources/img/#{loginMBean.currentUser.id}/original.jpg" aspectRatio="1.0" initialCoords="225,75,300,125" ratio="1"/>
-			<p:graphicImage id="cropped" name="#{cropperMBean.newImageName}.jpg" library="img"/>
-		    </h:panelGrid>
-
-		    <p:commandButton value="Crop" action="#{cropperMBean.crop}" update="cropped msgs" icon="ui-icon-scissors"/>
+		    <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{userMBean.upload}" auto="true" skinSimple="false" 
+			dragDropSupport="false" update="msgs cropper originalPhoto" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
+		    
+		    
+		    <div class="thumbnail">
+			<p:graphicImage  id="originalPhoto" value="#{userMBean.photoByUser}">
+			    <f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+			</p:graphicImage>
+		    </div>
+		    
 		</h:form>
 		
 		
