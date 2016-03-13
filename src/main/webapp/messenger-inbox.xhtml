@@ -60,7 +60,11 @@
 				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Boite de réception vide.">
 			    
 			    <c:set var="userFrom" value="#{message.getFromU()}" />
-			    <img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{message.getFromU().firstName} #{message.getFromU().lastName}"/>
+			    <p class="custom-thumbnail align-left">
+				<p:graphicImage value="#{userMBean.photoByUser}" alt="#{userFrom.firstName} #{userFrom.lastName}">
+				    <f:param name="userId" value="#{userFrom.id}"/>
+				</p:graphicImage>
+			    </p>
 			    <h6><a href="#">#{message.subject} <em> - #{message.getFromU().firstName} #{message.getFromU().lastName}</em></a> - <em>#{message.dateCreation}</em> - 
 				<p:commandLink action="#{messageMBean.removeMsg(message.id)}" ajax="true" update="dataToUpdate"><i class="icon-trash"></i></p:commandLink>
 			    </h6>
@@ -73,7 +77,11 @@
 			    <p:outputPanel id="msgDetail">
 				<p:panelGrid  columns="2" rendered="#{not empty messageMBean.selectedMsg}" columnClasses="label,value">
 				    <f:facet name="header">
-					<img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName}"/> 
+					<p style="margin:auto;" class="custom-thumbnail">
+					    <p:graphicImage value="#{userMBean.photoByUser}" alt="#{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName}">
+						<f:param name="userId" value="#{messageMBean.selectedMsg.fromU.id}"/>
+					    </p:graphicImage>
+					</p>
 				    </f:facet>
 
 				    <h:outputText value="De : " />
