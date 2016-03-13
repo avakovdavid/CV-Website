@@ -69,15 +69,15 @@
 			    placeholder="Utilisateur" emptyMessage="Aucun utilisateur trouvé.">
 
 			    <p:column>
-				<img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{u.firstName} #{u.lastName}"/> 
+				<div class="custom-thumbnail">
+				    <p:graphicImage value="#{userMBean.photoByUser}" alt="#{u.firstName} #{u.lastName}">
+					<f:param name="userId" value="#{u.id}"/>
+				    </p:graphicImage>
+				</div>
 			    </p:column>
 			    
 			    <p:column>
-				<h:outputText value="#{u.firstName}" />
-			    </p:column>
-
-			    <p:column>
-				<h:outputText value="#{u.email}" />
+				<h:outputText value="#{u.firstName} #{u.lastName}" />
 			    </p:column>
 			</p:autoComplete>
                     </div>
