@@ -53,9 +53,9 @@
 	<c:set var="cv" value="#{user.cv}" />
 	#{messageMBean.setToU(user)}
 	#{cvMBean.registerTheView(cv)}
-
+	
 	<ui:insert name="header" >
-	    <ui:include src="/WEB-INF/includes/cv/#{cv.template ? cv.template : 'full-width'}.xhtml" />
+	    <ui:include src="/WEB-INF/includes/cv/#{cv.template ne null ? cv.template : 'full-width'}.xhtml" />
 	</ui:insert>
     </div>
 
