@@ -16,7 +16,10 @@
 
             
             <div class="span3 sidebar page-left-sidebar"  style="text-align:center;"><!-- Begin sidebar column -->
-                <img src="img/gallery/gallery-img-1-full.jpg" alt="Gallery"/><br/><br/>
+                <p:graphicImage styleClass="align-left" id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 270px;">
+		    <f:param name="userId" value="#{user.id}"/>
+		</p:graphicImage>
+		<br/><br/>
 
 		<ui:insert>
 		    <ui:include src="/WEB-INF/includes/cv/global-infos.xhtml" />

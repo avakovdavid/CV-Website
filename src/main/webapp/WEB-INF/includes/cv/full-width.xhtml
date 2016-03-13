@@ -14,7 +14,9 @@
 	<ui:composition>
 	<div class="row">
             <div class="span3">
-                <img src="img/gallery/gallery-img-1-full.jpg" alt="Gallery"/>
+                <p:graphicImage styleClass="align-left" id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 270px;">
+		    <f:param name="userId" value="#{user.id}"/>
+		</p:graphicImage>
             </div>
             
             <div class="span6" >
