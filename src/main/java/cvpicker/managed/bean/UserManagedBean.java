@@ -67,7 +67,7 @@ public class UserManagedBean implements Serializable {
 		return ;
 	    }
 	    Cv cv = new Cv();
-	    cv.setTemplate("full_width");
+	    cv.setTemplate("full-width");
 	    
 	    Privacy defaultPrivacy = (Privacy)session.createCriteria(Privacy.class).add(Restrictions.eq("value", "connected_user")).uniqueResult();
 

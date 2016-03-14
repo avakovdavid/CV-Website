@@ -3,7 +3,8 @@
      xmlns:h='http://java.sun.com/jsf/html'
      xmlns:f='http://java.sun.com/jsf/core'
      xmlns:p="http://primefaces.org/ui"
-     xmlns:ui="http://java.sun.com/jsf/facelets">  
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">  
 
 <h:head>
     <f:event listener="#{loginMBean.checkLoggedIn}" type="preRenderView" />
@@ -56,57 +57,68 @@
 	    <ui:include src="/WEB-INF/includes/header.xhtml" />
 	</ui:insert>
 
-	<h2>Demandes d'ajout</h2>
-	<div class="row"> 
-            <div class="span12 gallery">
-		<div class="row clearfix ">
-		    <h:form id="friendRequests" styleClass="removeBackground">
+	<h:form id="friends" styleClass="removeBackground">
+	    <h2>Demandes d'ajout</h2>
+	    <div class="row"> 
+		<div class="span12 gallery">
+		    <div class="row clearfix ">
 			<p:dataList itemStyleClass="span3 gallery-item" value="#{friendMBean.getRequestList()}" var="friend" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated "
 			    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Pas de nouvelles demandes">
 
-                            <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friendRequests friendsList menu"></p:commandLink>
+			    <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
+				<span class="gallery-icons">
+				    <p:commandLink styleClass="item-accepte-link" action="#{friendMBean.acceptRequest(friend.id)}" ajax="true" update="friends menu"></p:commandLink>
 				    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
 					<f:param name="id" value="#{friend.id}"/>
 				    </h:link>
-				    <p:commandLink styleClass="item-reject-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendRequests"></p:commandLink>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/>#{friend.firstName.concat(" ").concat(friend.lastName)}</a>
-			    
+				    <p:commandLink styleClass="item-reject-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friends"></p:commandLink>
+				</span>
+			    </span>
+			    <h:link outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
+				<f:param name="id" value="#{friend.id}"/>
+				<p class="friend-photo">
+				<p:graphicImage styleClass="img-circle" value="#{userMBean.photoByUser}">
+				    <f:param name="userId" value="#{friend.id}"/>
+				</p:graphicImage>
+				<h5 style="text-align: center">#{friend.firstName.concat(" ").concat(friend.lastName)}</h5>
+				</p>
+			    </h:link>
 			</p:dataList>
-		    </h:form>
-                </div>
-            </div><!-- End gallery list-->
-        </div>
-	
-	<h2>Mes amis</h2>
-	<div class="row"> 
-            <div class="span12 gallery">
-		<div class="row clearfix ">
-		    <h:form id="friendsList" styleClass="removeBackground">
+		    </div>
+		</div><!-- End gallery list-->
+	    </div>
+
+	    <h2>Mes amis</h2>
+	    <div class="row"> 
+		<div class="span12 gallery">
+		    <div class="row clearfix ">
 			<p:dataList itemStyleClass="span3 gallery-item" value="#{friendMBean.getList()}" var="friend" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated"
 			    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Vous n'avez pas d'amis">
-			    
-                            <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Voir la photo" data-rel="prettyPhoto"></a>
-                                    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
+
+			    <span class="gallery-hover-4col-cir hidden-phone hidden-tablet">
+				<span class="gallery-icons">				    
+				    <h:link  styleClass="item-details-link" outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
 					<f:param name="id" value="#{friend.id}"/>
 				    </h:link>
-				    <p:commandLink styleClass="item-remove-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friendsList"></p:commandLink>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="img/gallery/gallery-img-1-4col-cir.jpg" alt="Gallery" class="img-circle"/>#{friend.firstName.concat(" ").concat(friend.lastName)}</a>
-			    
+				    <p:commandLink styleClass="item-remove-link" action="#{friendMBean.removeFriend(friend.id)}" ajax="true" update="friends"></p:commandLink>
+				</span>
+			    </span>
+			    <h:link outcome="/cv.xhtml?faces-redirect=true" includeViewParams="true">
+				<f:param name="id" value="#{friend.id}"/>
+				<p class="friend-photo">
+				<p:graphicImage styleClass="" value="#{userMBean.photoByUser}">
+				    <f:param name="userId" value="#{friend.id}"/>
+				</p:graphicImage>
+				<h5 style="text-align: center">#{friend.firstName.concat(" ").concat(friend.lastName)}</h5>
+				</p>
+			    </h:link>
 			</p:dataList>
-		    </h:form>
-                </div>
-            </div><!-- End gallery list-->
-        </div>
+		    </div>
+		</div><!-- End gallery list-->
+	    </div>
+	</h:form>
     </div> <!-- End Container -->
 
     <ui:insert name="footer" >
