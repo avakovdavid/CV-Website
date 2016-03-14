@@ -57,15 +57,30 @@
 		<h:form id="cropper" enctype="multipart/form-data">
 		    <p:growl id="msgs" showDetail="true"/>
 		    <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{userMBean.upload}" auto="true" skinSimple="false" 
-			dragDropSupport="false" update="msgs cropper originalPhoto" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
-		    
-		    
-		    <div class="thumbnail">
-			<p:graphicImage  id="originalPhoto" value="#{userMBean.photoByUser}">
-			    <f:param name="userId" value="#{loginMBean.currentUser.id}"/>
-			</p:graphicImage>
-		    </div>
-		    
+			dragDropSupport="false" update="msgs cropper" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
+		    <table>
+			<tr>
+			    <td>
+				<p:graphicImage styleClass="align-left" id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 270px;">
+				    <f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				</p:graphicImage>
+			    </td>
+			    <td>
+				<div class="friend-photo">
+				    <p:graphicImage value="#{userMBean.photoByUser}">
+					<f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				    </p:graphicImage>
+				</div>
+			    </td>
+			    <td>
+				<div class="custom-thumbnail">
+				    <p:graphicImage value="#{userMBean.photoByUser}">
+					<f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				    </p:graphicImage>
+				</div>
+			    </td>
+			</tr>
+		    </table>
 		</h:form>
 		
 		
