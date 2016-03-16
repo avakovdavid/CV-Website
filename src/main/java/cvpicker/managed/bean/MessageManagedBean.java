@@ -20,6 +20,10 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ * Message Managed Bean 
+ * Send, remove, get list of messages.
+ */
 public class MessageManagedBean implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -36,6 +40,11 @@ public class MessageManagedBean implements Serializable{
     private Message selectedMsg;
 
     
+    /**
+     * Method to propose autocompletion for user search
+     * @param q Querry search
+     * @return List of User
+     */
     public List<User> completeToU(String q) {  
         List<User> results;  
 	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -50,7 +59,7 @@ public class MessageManagedBean implements Serializable{
     } 
     
     /**
-     *
+     * Method to send new message
      * @return
      */
     public String send(){
@@ -84,6 +93,10 @@ public class MessageManagedBean implements Serializable{
 	return "";
     }
     
+    /**
+     * Method to get the list of received messages
+     * @return 
+     */
     public List<Message> receivedList(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Criteria criteria = session.createCriteria(Message.class);
@@ -94,6 +107,10 @@ public class MessageManagedBean implements Serializable{
 	return msgList;	
     }
     
+    /**
+     * Method to get the list of sent messages 
+     * @return 
+     */
     public List<Message> sendedList(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Criteria criteria = session.createCriteria(Message.class);
@@ -106,7 +123,6 @@ public class MessageManagedBean implements Serializable{
     
     /**
      * Reset Fields
-     *
      */
     public void reset() {
        this.setContent("");
@@ -253,6 +269,10 @@ public class MessageManagedBean implements Serializable{
 	this.newMsgCounter = newMsgCounter;
     }
     
+    /**
+     * Method to remove message by id
+     * @param id message id to remove 
+     */
     public void removeMsg(int id){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Criteria criteria = session.createCriteria(Message.class);
@@ -292,5 +312,4 @@ public class MessageManagedBean implements Serializable{
 	    session.close();
 	}
     }
-    
 }
