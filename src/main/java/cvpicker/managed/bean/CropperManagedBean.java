@@ -16,10 +16,6 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.CroppedImage;
 import org.primefaces.model.UploadedFile;
 
-/**
- *
- * @author DAVID
- */
 public class CropperManagedBean implements Serializable{
     
     private LoginManagedBean loginBean;

@@ -10,10 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author DAVID
- */
 @Embeddable
 public class UserSkillPK implements Serializable {
     @Basic(optional = false)

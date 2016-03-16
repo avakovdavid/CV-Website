@@ -10,8 +10,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
  * object.
- *
- * @author DAVID
  */
 public class HibernateUtil {
 

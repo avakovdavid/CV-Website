@@ -23,10 +23,6 @@ import org.hibernate.criterion.Restrictions;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.ReorderEvent;
 
-/**
- *
- * @author DAVID
- */
 public class UserSkillManagedBean implements Serializable{
 
     private String skillName;

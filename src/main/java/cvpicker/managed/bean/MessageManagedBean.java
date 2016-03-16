@@ -20,10 +20,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author DAVID
- */
 public class MessageManagedBean implements Serializable{
     private static final long serialVersionUID = 1L;
     

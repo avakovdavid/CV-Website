@@ -19,10 +19,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author DAVID
- */
 public class FriendManagedBean  implements Serializable{
     
     private LoginManagedBean loginBean;

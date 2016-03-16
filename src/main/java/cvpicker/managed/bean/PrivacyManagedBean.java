@@ -14,10 +14,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author DAVID
- */
 public class PrivacyManagedBean implements Serializable{
     
     private Privacy[] privacyLevels;

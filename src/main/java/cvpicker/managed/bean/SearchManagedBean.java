@@ -13,10 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author DAVID
- */
 public class SearchManagedBean implements Serializable{
     private LoginManagedBean loginBean;
     private String query;
