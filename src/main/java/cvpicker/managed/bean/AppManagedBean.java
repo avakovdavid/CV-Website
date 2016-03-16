@@ -12,6 +12,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/**
+ * App Managed Bean
+ * Will insert some data to database the first time
+ */
 public class AppManagedBean implements Serializable{
     
     @PostConstruct

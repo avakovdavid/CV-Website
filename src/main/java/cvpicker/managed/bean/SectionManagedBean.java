@@ -24,6 +24,10 @@ import org.hibernate.criterion.Restrictions;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.ReorderEvent;
 
+/**
+ * Sections Managed Bean
+ * Add, remove, swap, get list 
+ */
 public class SectionManagedBean implements Serializable{
 
     private String sectionTitle;
@@ -65,6 +69,11 @@ public class SectionManagedBean implements Serializable{
 	session.close();
     }
     
+    /**
+     * Get sections list by user
+     * @param u user to get sections for 
+     * @return 
+     */
     public List<Section> getUserSectionsByUser(User u){
 	List<Section> result;
 	
@@ -80,6 +89,9 @@ public class SectionManagedBean implements Serializable{
 	return result; 
     }
     
+    /**
+     * Add a new section
+     */
     public void addSection(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -115,10 +127,17 @@ public class SectionManagedBean implements Serializable{
 	}
     }
 
+    /**
+     * Clear values in the section form
+     */
     private void resetNewSectionValues() {
 	setSectionTitle("");
     }
     
+    /**
+     * Remove section
+     * @param section section to remove
+     */
     public void removeSection(Section section){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -147,6 +166,10 @@ public class SectionManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Swap sections
+     * @param event 
+     */
     public void swapSections(ReorderEvent event){
 	//When this method is called, two skills are already swaped in the skills array
 	int from = event.getFromIndex();
@@ -195,6 +218,9 @@ public class SectionManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Add new element in section
+     */
     public void addElement(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -235,6 +261,11 @@ public class SectionManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Remove element from section
+     * @param section section to remove element from
+     * @param element element to remove
+     */
     public void removeElement(Section section, Element element){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -262,6 +293,10 @@ public class SectionManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Swap elements
+     * @param event 
+     */
     public void swapElements(ReorderEvent event){
 	//When this method is called, two elements are already swaped in the skills array
 	int from = event.getFromIndex();
@@ -314,6 +349,9 @@ public class SectionManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Clear values in the element form
+     */
     public void resetNewElementValues(){
 	setElementDescription("");
 	setElementTitle("");
@@ -363,10 +401,20 @@ public class SectionManagedBean implements Serializable{
 	this.loginBean = loginBean;
     }
     
+    /**
+     * Get elements for section
+     * @param section section to get elements from
+     * @return 
+     */
     public List<Element> getElementsBySection(Section section){
 	return sectionsHashMap.get(section);
     }
     
+    /**
+     * Same that getElementsBySection(). This one refresh the list from database.
+     * @param section
+     * @return 
+     */
     public List<Element> getElementsBySectionFromDatabase(Section section){
 	List<Element> result;
 	
@@ -381,10 +429,12 @@ public class SectionManagedBean implements Serializable{
 	return result;
     }
     
+    /**
+     * Method to set the section where new element will be inserted
+     * @param section 
+     */
     public void prepareElementDialog(Section section){
-	sectionWhereAddElement = section;
-	
-	
+	sectionWhereAddElement = section;	
     }
 
     /**
