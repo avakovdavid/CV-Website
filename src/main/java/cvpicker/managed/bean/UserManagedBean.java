@@ -111,6 +111,9 @@ public class UserManagedBean implements Serializable {
 	}
     }
     
+    /**
+     * Update user infos
+     */
     public void update(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -132,6 +135,12 @@ public class UserManagedBean implements Serializable {
 	}
     }
     
+    /**
+     * Get profile photo by user (http request must contain 'userId' parameter)
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public StreamedContent getPhotoByUser() throws FileNotFoundException, IOException{
 	FacesContext context = FacesContext.getCurrentInstance();
 	
@@ -163,6 +172,11 @@ public class UserManagedBean implements Serializable {
 	}
     }
     
+    /**
+     * Method to upload profile photo 
+     * @param event File Upload Event
+     * @throws IOException 
+     */
     public void upload(FileUploadEvent event) throws IOException {
 	UploadedFile uploadedFile = event.getFile();
 	byte [] uploadedFileIS = uploadedFile.getContents();	
@@ -187,12 +201,20 @@ public class UserManagedBean implements Serializable {
 	}
     }
  
+    /**
+     * Method to get all users
+     * @return 
+     */
     public List<User> getUsers() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	List<User>  userList = session.createCriteria(User.class).list();
 	return userList;
     }
     
+    /**
+     * Method to get list of users sorted by their popularity (number of cv views)
+     * @return 
+     */
     public List<User> getPopularUsers(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Criteria criteria = session.createCriteria(User.class).createCriteria("cv");
@@ -203,6 +225,11 @@ public class UserManagedBean implements Serializable {
 	return userList;
     }
     
+    /**
+     * Method to get user by id
+     * @param id id of the user to retrive 
+     * @return 
+     */
     public User getUserById(int id){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	User user = (User) session.createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
@@ -288,10 +315,19 @@ public class UserManagedBean implements Serializable {
 	this.email = email;
     }
  
+    /**
+     * Get user password
+     * 
+     * @return user password
+     */
     public String getPassword() {
 	return password;
     }
 
+    /**
+     * Set user password
+     * @param password new user password 
+     */
     public void setPassword(String password) {
 	this.password = password;
     }

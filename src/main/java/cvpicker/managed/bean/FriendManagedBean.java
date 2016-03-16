@@ -19,6 +19,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ * Friend Managed Bean
+ * Add, remove get lists
+ */
 public class FriendManagedBean  implements Serializable{
     
     private LoginManagedBean loginBean;
@@ -53,6 +57,10 @@ public class FriendManagedBean  implements Serializable{
 	}
     }
     
+    /**
+     * Accept a friend request
+     * @param id friend id
+     */
     public void acceptRequest(int id){
 	User userToAccepte = getUserBean().getUserById(id);
 	
@@ -92,6 +100,11 @@ public class FriendManagedBean  implements Serializable{
 	}
     }
     
+    /**
+     * Method to check if current user is already friend with another
+     * @param u user to test 
+     * @return 
+     */
     public boolean alreadyFriendWith(User u){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	User userA = getLoginBean().getCurrentUser();
@@ -109,6 +122,9 @@ public class FriendManagedBean  implements Serializable{
 	return friend != null;
     }
     
+    /**
+     * Send friend request
+     */
     public void sendRequest(){
 	int id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
 	
@@ -168,6 +184,10 @@ public class FriendManagedBean  implements Serializable{
 	}
     }
     
+    /**
+     * Method to remove friend (accepted or not)
+     * @param id friend id
+     */
     public void removeFriend(int id){
 	User friendToRemove = getUserBean().getUserById(id);
 	
@@ -206,6 +226,10 @@ public class FriendManagedBean  implements Serializable{
 	}
     }
     
+    /**
+     * Method to get all friend requests 
+     * @return 
+     */
     public List<User> getRequestList(){
 	List<User> result = new ArrayList<User>();
 	
@@ -224,6 +248,10 @@ public class FriendManagedBean  implements Serializable{
 	return result;
     }
     
+    /**
+     * Method to get the list of all friends
+     * @return 
+     */
     public List<User> getList(){
 	List<User> result = new ArrayList<User>();
 	
@@ -248,6 +276,10 @@ public class FriendManagedBean  implements Serializable{
 	return result;
     }
     
+    /**
+     * Method to get the list of connected friends
+     * @return 
+     */
     public List<User> getConnectedList(){
 	List<User> result = new ArrayList<User>();
 	
