@@ -128,7 +128,7 @@
 				<p:column headerText="Element" styleClass="wrap">
 				    <h4><h:outputText value="#{element.title}"/></h4>
 				    <h:outputText value="#{element.description}"/><br/>
-				    <h:outputText value="#{element.dateStart}"/> - <h:outputText value="#{element.dateEnd}"/><br/>
+				    <h:outputText value="#{dateMBean.format(element.dateStart)}"/> - <h:outputText value="#{dateMBean.format(element.dateEnd)}"/><br/>
 				    <i><h:outputText value="#{element.informations}"/></i><br/>
 				</p:column>
 				
