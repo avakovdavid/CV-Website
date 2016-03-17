@@ -356,7 +356,8 @@ public class SectionManagedBean implements Serializable{
 	setElementDescription("");
 	setElementTitle("");
 	setElementInformations("");
-	
+	setElementDateStart(null);
+	setElementDateEnd(null);
     }
 
     /**
