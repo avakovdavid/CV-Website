@@ -82,21 +82,20 @@
 			<div class="mobile-nav-select">
 			    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 				<option value="">Navigate...</option>
-				<option value="index.htm">Accueil</option>
-				<option value="cv-full-width.htm">Mon CV</option>
-				    <option value="cv-full-width.htm">- CV - Full Width</option>
-				    <option value="cv-right-sidebar.htm">- CV - Right Sidebar</option>
-				    <option value="cv-left-sidebar.htm">- Cv - Left Sidebar</option>
-				    <option value="cv-double-sidebar.htm">- CV - Double Sidebar</option>
-				    <option value="cv-edit.htm">- Editer mon CV</option>
-				<option value="mesenger-inbox.htm">Messagerie</option>
-				    <option value="mesenger-inbox.htm">- Boite de réception</option>
-				    <option value="mesenger-outbox.htm">- Boite d'envoie</option>
-				    <option value="mesenger-new.htm">- Nouveau message</option>
-				<option value="friends.htm">Mes amis</option>
-				<option value="options.htm">Options</option>
-				<option value="index-anonyme.htm">Se déconnecter</option>
+				<option value="index.xhtml">Accueil</option>
+				<option value="cv.xhtml">Mon CV</option>
+				    <option value="cv.xhtml">- Voir mon CV</option>
+				    <option value="cv-editor.xhtml">- Editer mon CV</option>
+				<option value="messenger-inbox.xhtml">Messagerie</option>
+				    <option value="messenger-inbox.xhtml">- Boite de réception</option>
+				    <option value="messenger-outbox.xhtml">- Boite d'envoie</option>
+				    <option value="messenger-new.xhtml">- Nouveau message</option>
+				<option value="friends.xhtml">Mes amis</option>
+				<option value="profil.xhtml">Paramètres</option>
+				    <option value="profil.xhtml">- Profil</option>
+				    <option value="settings.xhtml">- Options</option>
 			    </select>
+			    <h:form style="margin:50% 0;"><p:commandLink action="#{loginMBean.logout}"  title="Se déconnecter"><i class="icon-off"></i></p:commandLink></h:form>
 			</div>
 		    </h:form>
 		</div>
