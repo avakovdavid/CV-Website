@@ -96,7 +96,7 @@
 			<i class="icon-plus"></i>ajouter une compétence
 		    </p:commandLink><br/><br/>
 		    
-		    <p:dialog header="Nouvelle compétence" widgetVar="newSkillDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+		    <p:dialog id="newSkillDialog" header="Nouvelle compétence" widgetVar="newSkillDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
 			<p:outputPanel id="msgDetail">
 			    <h:outputLabel for="skillName" value="Nom :" />
 			    <p:inputText id="skillName" value="#{userSkillMBean.skillName}"/><br/>
@@ -107,7 +107,7 @@
 			    <h:outputLabel for="skillMark" value="Pourcentage de maîtrise :" />
 			    <p:spinner stepFactor="5" id="skillMark" value="#{userSkillMBean.skillMark}" min="0" max="100" suffix="%"/><br/>
 			    
-			    <p:commandButton id="addSkillButton" value="Ajouter" action='#{userSkillMBean.addSkill}' ajax='true' update="skills"/>
+			    <p:commandButton id="addSkillButton" value="Ajouter" action='#{userSkillMBean.addSkill}' ajax='true' update="skills newSkillDialog"/>
 			</p:outputPanel>
 		    </p:dialog>
 		    <!-- END SKILLS AREA -->
