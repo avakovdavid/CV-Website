@@ -69,7 +69,7 @@
 				#{loginMBean.currentUser.lastName}</h3><br />
 				<p>#{cvMBean.getViewsCounter()} <i class="icon-eye-open"></i></p>
 				<p>#{friendMBean.friendsCounter} <i class="icon-user"></i></p>
-				<p>#{loginMBean.currentUser.lastEditionDate} <i class="icon-pencil"></i></p>
+                                <p>#{dateMBean.format(loginMBean.currentUser.lastEditionDate)} <i class="icon-pencil"></i></p>
 			</div>
 		</div><!-- End Headline -->
 		

@@ -66,7 +66,7 @@
 				    <f:param name="userId" value="#{userFrom.id}"/>
 				</p:graphicImage>
 			    </p>
-			    <h6><a href="#">#{message.subject} <em> - #{message.getFromU().firstName} #{message.getFromU().lastName}</em></a> - <em>#{message.dateCreation}</em> - 
+                            <h6><a href="#">#{message.subject} <em> - #{message.getFromU().firstName} #{message.getFromU().lastName}</em></a> - <em>#{dateMBean.formatHours(message.dateCreation)}</em> - 
 				<p:commandLink action="#{messageMBean.removeMsg(message.id)}" ajax="true" update="dataToUpdate"><i class="icon-trash"></i></p:commandLink>
 			    </h6>
 			    <p:commandLink update=":inboxForm:msgDetail" oncomplete="PF('msgDialog').show()" title="View Detail" styleClass="btn #{message.wasRead ? 'btn-small' : 'btn-large btn-warning'}">
@@ -92,7 +92,7 @@
 				    <h:outputText value="#{messageMBean.selectedMsg.toU.firstName} #{messageMBean.selectedMsg.toU.lastName}" />
 
 				    <h:outputText value="Date : " />
-				    <h:outputText value="#{messageMBean.selectedMsg.dateCreation}"/>
+                                    <h:outputText value="#{dateMBean.formatHours(messageMBean.selectedMsg.dateCreation)}"/>
 				    
 				    <h:outputText value="Sujet : " />
 				    <h:outputText value="#{messageMBean.selectedMsg.subject}"/>
@@ -104,12 +104,12 @@
 				<h:commandLink  id="sendMsgButton" styleClass="btn btn-large btn-success" value="Répondre"  action="/messenger-new.xhtml?faces-redirect=true" >
 				    <f:setPropertyActionListener target="#{messageMBean.toU}" value="#{messageMBean.selectedMsg.fromU}"/>
 				    <f:setPropertyActionListener target="#{messageMBean.subject}" value="RE : #{messageMBean.selectedMsg.subject}"/>
-				    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{messageMBean.selectedMsg.dateCreation} -----&#13;#{messageMBean.selectedMsg.content}"/>
+                                    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{dateMBean.formatHours(messageMBean.selectedMsg.dateCreation)} -----&#13;#{messageMBean.selectedMsg.content}"/>
 				</h:commandLink>
 				<h:commandLink  id="transferMsgButton" styleClass="btn btn-success" value="Transférer"  action="/messenger-new.xhtml?faces-redirect=true">
 				    <f:setPropertyActionListener target="#{messageMBean.toU}" value=""/>
 				    <f:setPropertyActionListener target="#{messageMBean.subject}" value="FW : #{messageMBean.selectedMsg.subject}"/>
-				    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{messageMBean.selectedMsg.dateCreation} -----&#13;#{messageMBean.selectedMsg.content}"/>
+                                    <f:setPropertyActionListener target="#{messageMBean.content}" value="&#13;&#13;&#13;----- #{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName} - #{dateMBean.formatHours(messageMBean.selectedMsg.dateCreation)} -----&#13;#{messageMBean.selectedMsg.content}"/>
 				</h:commandLink>
 			    </p:outputPanel>
 			</p:dialog>

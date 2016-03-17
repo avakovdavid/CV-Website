@@ -78,11 +78,11 @@ public class MessageManagedBean implements Serializable{
 	    session.save(msg);
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien été envoyé.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien Ã©tÃ© envoyÃ©.", ""));
 
 	    reset();
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problÃ¨me est survenu sur le serveur. Veuillez rÃ©essayer ultÃ©rieurement.", ""));
 	    if (tx != null) {
 		tx.rollback();
 	    }
@@ -302,9 +302,9 @@ public class MessageManagedBean implements Serializable{
 	    
 	    tx.commit();
 	    
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien été supprimé.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre message a bien Ã©tÃ© supprimÃ©.", ""));
 	} catch (Exception e) {
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. Le message n'a pas pu être supprimé.", ""));
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Une erreur s'est produite. Le message n'a pas pu Ãªtre supprimÃ©.", ""));
 	    if (tx != null) {
 		tx.rollback();
 	    }
