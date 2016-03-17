@@ -12,14 +12,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
-import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *
- * @author DAVID
+ * CV Managed Bean 
+ * Manage cv title, description, template and number of views
  */
 public class CvManagedBean implements Serializable{
 
@@ -41,6 +40,9 @@ public class CvManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Method to update CV
+     */
     public void update(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	
@@ -71,6 +73,10 @@ public class CvManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Increment views counter for CV
+     * @param cv The CV wich view will be incremented
+     */
     public void registerTheView(Cv cv){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	User user = loginBean.getCurrentUser();
@@ -117,6 +123,10 @@ public class CvManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Get viewd counter for the current user
+     * @return 
+     */
     public int getViewsCounter(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	session.refresh(loginBean.getCurrentUser().getCv());

@@ -36,6 +36,7 @@
     <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.custom.js"></script>
 </h:head>
 <h:body>
     <ui:insert name="header" >
@@ -56,15 +57,31 @@
 		<i>Ici vous pouvez modifier les informations globales de votre profil </i>
 		<h:form id="cropper" enctype="multipart/form-data">
 		    <p:growl id="msgs" showDetail="true"/>
-		    <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{cropperMBean.upload}" auto="true" skinSimple="false" 
-			dragDropSupport="false" update="msgs cropper cropper" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
-		    <h:panelGrid columns="2">
-			<!--<p:imageCropper value="#{cropperMBean.croppedImage}" image="/resources/img/blog-med-img-1.jpg" initialCoords="225,75,300,125"/>-->
-			<p:imageCropper value="#{cropperMBean.croppedImage}" image="/resources/img/#{loginMBean.currentUser.id}/original.jpg" aspectRatio="1.0" initialCoords="225,75,300,125" ratio="1"/>
-			<p:graphicImage id="cropped" name="#{cropperMBean.newImageName}.jpg" library="img"/>
-		    </h:panelGrid>
-
-		    <p:commandButton value="Crop" action="#{cropperMBean.crop}" update="cropped msgs" icon="ui-icon-scissors"/>
+		    <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{userMBean.upload}" auto="true" skinSimple="false" 
+			dragDropSupport="false" update="msgs cropper" allowTypes="/(\.|\/)(png|jpe?g|gif)$/"  />
+		    <table>
+			<tr>
+			    <td>
+				<p:graphicImage styleClass="align-left" id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 270px;">
+				    <f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				</p:graphicImage>
+			    </td>
+			    <td>
+				<div class="friend-photo">
+				    <p:graphicImage value="#{userMBean.photoByUser}">
+					<f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				    </p:graphicImage>
+				</div>
+			    </td>
+			    <td>
+				<div class="custom-thumbnail">
+				    <p:graphicImage value="#{userMBean.photoByUser}">
+					<f:param name="userId" value="#{loginMBean.currentUser.id}"/>
+				    </p:graphicImage>
+				</div>
+			    </td>
+			</tr>
+		    </table>
 		</h:form>
 		
 		

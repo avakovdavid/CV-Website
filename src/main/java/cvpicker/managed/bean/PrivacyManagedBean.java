@@ -15,8 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *
- * @author DAVID
+ * Privacy Managed Bean
  */
 public class PrivacyManagedBean implements Serializable{
     
@@ -34,12 +33,22 @@ public class PrivacyManagedBean implements Serializable{
 	privacyLevels = (Privacy[]) l.toArray(privacyLevels);
     }
 
+    /**
+     * Get privacy by id
+     * @param id
+     * @return 
+     */
     public Privacy getPrivacyById(int id){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Privacy privacy = (Privacy) session.createCriteria(Privacy.class).add(Restrictions.eq("id", id)).uniqueResult();
 	return privacy;
     }
     
+    /**
+     * Verify if current user can access global info of another user
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleGlobalInfoOf(User user){
 	if(user == null){
 	    return false;
@@ -48,6 +57,11 @@ public class PrivacyManagedBean implements Serializable{
 	return testPrivacyAccess(user, privacyLevel);
     }
     
+    /**
+     * Verify if current user can access skills list of another user
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleSkillsOf(User user){
 	if(user == null){
 	    return false;
@@ -56,6 +70,11 @@ public class PrivacyManagedBean implements Serializable{
 	return testPrivacyAccess(user, privacyLevel);
     }
     
+    /**
+     * Verify if current user can access sections list of another user
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleSectionsOf(User user){
 	if(user == null){
 	    return false;
@@ -64,6 +83,11 @@ public class PrivacyManagedBean implements Serializable{
 	return testPrivacyAccess(user, privacyLevel);
     }
     
+    /**
+     * Verify if current user can send message to another user
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleSendMessagesOf(User user){
 	if(user == null){
 	    return false;
@@ -72,6 +96,11 @@ public class PrivacyManagedBean implements Serializable{
 	return testPrivacyAccess(user, privacyLevel);
     }
     
+    /**
+     * Verify if current user can add to friend list another user
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleAddFriendOf(User user){
 	if(user == null){
 	    return false;
@@ -80,6 +109,11 @@ public class PrivacyManagedBean implements Serializable{
 	return testPrivacyAccess(user, privacyLevel);
     }
     
+    /**
+     * Verify if current user can see another user on search page
+     * @param user user to test
+     * @return 
+     */
     public boolean isAccessibleOnSearchOf(User user){
 	if(user == null){
 	    System.out.println("search user null");

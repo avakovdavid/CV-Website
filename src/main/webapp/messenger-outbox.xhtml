@@ -36,6 +36,7 @@
     <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.custom.js"></script>
 </h:head>
 <h:body>
     <ui:insert name="header" >
@@ -59,7 +60,11 @@
 				    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Pas de nouvelles demandes">
 			    <c:set var="userTo" value="#{message.getToU()}" />
-			    <img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{userTo.firstName} #{userTo.lastName}"/>
+			    <p class="custom-thumbnail align-left">
+				<p:graphicImage value="#{userMBean.photoByUser}" alt="#{userTo.firstName} #{userTo.lastName}">
+				    <f:param name="userId" value="#{userTo.id}"/>
+				</p:graphicImage>
+			    </p>
 			    <h6><a href="#">#{message.subject} <em> - #{userTo.firstName} #{userTo.lastName}</em></a> - <em>#{message.dateCreation}</em> - 
 				<p:commandLink action="#{messageMBean.removeMsg(message.id)}" ajax="true" update="dataToUpdate"><i class="icon-trash"></i></p:commandLink>
 			    </h6>
@@ -72,7 +77,11 @@
 			    <p:outputPanel id="msgDetail">
 				<p:panelGrid  columns="2" rendered="#{not empty messageMBean.selectedMsg}" columnClasses="label,value">
 				    <f:facet name="header">
-					<img src="img/gallery/gallery-img-2-thumb.jpg" alt="#{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName}"/> 
+					<p style="margin:auto;" class="custom-thumbnail">
+					    <p:graphicImage value="#{userMBean.photoByUser}" alt="#{messageMBean.selectedMsg.fromU.firstName} #{messageMBean.selectedMsg.fromU.lastName}">
+						<f:param name="userId" value="#{messageMBean.selectedMsg.fromU.id}"/>
+					    </p:graphicImage>
+					</p>
 				    </f:facet>
 
 				    <h:outputText value="De : " />

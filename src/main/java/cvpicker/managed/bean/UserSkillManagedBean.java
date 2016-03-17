@@ -24,8 +24,8 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.ReorderEvent;
 
 /**
- *
- * @author DAVID
+ * User Skills Managed Bean
+ * Add, remove, swap, get list
  */
 public class UserSkillManagedBean implements Serializable{
 
@@ -49,6 +49,11 @@ public class UserSkillManagedBean implements Serializable{
 	session.close();
     }
     
+    /**
+     * Get skills list by user id
+     * @param u user to get skills for 
+     * @return 
+     */
     public List<UserSkill> getUserSkillsByUser(User u){
 	List<UserSkill> result;
 	
@@ -64,6 +69,9 @@ public class UserSkillManagedBean implements Serializable{
 	return result; 
     }
     
+    /**
+     * Add new skill
+     */
     public void addSkill(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -127,6 +135,10 @@ public class UserSkillManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Remove skill 
+     * @param userSkill skill to remove
+     */
     public void removeSkill(UserSkill userSkill){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -155,6 +167,10 @@ public class UserSkillManagedBean implements Serializable{
 	}
     }
     
+    /**
+     * Swap skills position in the list 
+     * @param event 
+     */
     public void swapSkills(ReorderEvent event){
 	//When this method is called, two skills are already swaped in the skills array
 	int from = event.getFromIndex();

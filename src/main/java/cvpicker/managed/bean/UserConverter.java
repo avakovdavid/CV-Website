@@ -9,14 +9,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-
-
-
-/**
- *
- * @author DAVID
- */
-//@FacesConverter("UserConverter")
 public class UserConverter implements Converter{
     
     private UserManagedBean userBean;

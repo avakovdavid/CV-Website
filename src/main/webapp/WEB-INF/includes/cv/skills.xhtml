@@ -12,8 +12,8 @@
     
     <body>
 	<ui:composition>
-	    <h:form id="cvSkills" styleClass="span12 removeBackground" rendered="#{privacyMBean.isAccessibleSkillsOf(user)}">
-		<p:dataGrid id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher." columns="4" layout="grid" paginator="false">
+	    <h:form id="cvSkills" styleClass="removeBackground" rendered="#{privacyMBean.isAccessibleSkillsOf(user)}">
+		<p:dataGrid id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(user)}" emptyMessage="Aucune compétence à afficher." columns="#{cv.template eq 'double-sidebar' ? 1 : cv.template eq 'right-sidebar' or cv.template eq 'left-sidebar' ? 2 : 4}" layout="grid" paginator="false">
 		    <p:panel style="text-align:center">
 			<h:panelGrid columns="1" style="width:100%">
 			    <h6>#{skill.skill.name}</h6>

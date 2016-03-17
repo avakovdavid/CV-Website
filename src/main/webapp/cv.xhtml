@@ -35,6 +35,7 @@
     <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.custom.js"></script>
 </h:head>
 <h:body>
     <ui:insert name="header" >
@@ -53,9 +54,9 @@
 	<c:set var="cv" value="#{user.cv}" />
 	#{messageMBean.setToU(user)}
 	#{cvMBean.registerTheView(cv)}
-
+	
 	<ui:insert name="header" >
-	    <ui:include src="/WEB-INF/includes/cv/#{cv.template ? cv.template : 'full-width'}.xhtml" />
+	    <ui:include src="/WEB-INF/includes/cv/#{cv.template ne null ? cv.template : 'full-width'}.xhtml" />
 	</ui:insert>
     </div>
 

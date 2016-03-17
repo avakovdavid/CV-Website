@@ -14,7 +14,12 @@
 	<ui:composition>
 	<div class="row headline">
             <div class="span4 sidebar page-sidebar">
-                <span style="text-align:right;"><img src="img/gallery/gallery-img-1-full.jpg" alt="Gallery"/><br /><br /></span>
+                <span style="text-align:right;">
+		    <p:graphicImage id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 370px;">
+			<f:param name="userId" value="#{user.id}"/>
+		    </p:graphicImage>
+		    <br /><br />
+		</span>
                 
 		<h5 class="title-bg" style="margin-top: 0px;">Compétences</h5>
 		<div class="row"> 

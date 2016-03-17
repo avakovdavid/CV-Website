@@ -9,13 +9,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-
-
-
-/**
- *
- * @author DAVID
- */
 public class PrivacyConverter implements Converter{
     
     private PrivacyManagedBean privacyBean;

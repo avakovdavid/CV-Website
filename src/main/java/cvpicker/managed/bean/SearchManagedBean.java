@@ -14,15 +14,19 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *
- * @author DAVID
- */
+ * Search Managed Bean
+ * Do search querry
+*/
 public class SearchManagedBean implements Serializable{
     private LoginManagedBean loginBean;
     private String query;
     
     private List<User> result;
     
+    /**
+     * Search 
+     * @return 
+     */
     public String doSearch(){
 	if(query.length() > 0){
 	    String[] splitQuery = query.split(" ");

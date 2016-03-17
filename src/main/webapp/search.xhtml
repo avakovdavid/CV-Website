@@ -35,6 +35,7 @@
     <!--<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.custom.js"></script>
 </h:head>
 <h:body>
     <ui:insert name="header" >
@@ -52,7 +53,7 @@
         <h2>Résultat de recherche pour "#{searchMBean.query}"</h2>
         <div class="row">
             <div class="span8">
-		<h:form id="searchResult" styleClass="removeBackground">
+		<h:form id="searchResult" styleClass="removeBackground" prependId="false">
 		    <p:dataList id="result" value="#{searchMBean.result}" var="result" type="unordered" itemType="none" paginator="true" rows="10" 
 				    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				    rowsPerPageTemplate="5,10,15" paginatorAlwaysVisible="false" emptyMessage="Aucune résultat trouvé.">
@@ -61,20 +62,29 @@
 			    <article class="clearfix">
 				<h:link outcome="/cv.xhtml?faces-redirect=true">
 				    <f:param name="id" value="#{result.id}" />
-				    <img src="img/gallery/gallery-img-1-4col.jpg" alt="Post Thumb" class="align-left"/>
+				    
+				    <p:graphicImage styleClass="align-left" id="photoImage" value="#{userMBean.photoByUser}" style="max-width: 250px;">
+					<f:param name="userId" value="#{result.id}"/>
+				    </p:graphicImage>
+					
 				</h:link>
 				<h4 class="title-bg"><a href="cv.xhtml?id=#{result.id}">#{result.firstName} #{result.lastName}</a></h4>
 				<p>#{result.cv.title}</p>
 
-				<h:link styleClass="btn btn-mini btn-inverse" value="Voir ce CV"  outcome="/cv.xhtml?faces-redirect=true">
+				<h:link styleClass="btn btn-large" value="Voir ce CV"  outcome="/cv.xhtml?faces-redirect=true">
 				    <f:param name="id" value="#{result.id}" />
 				</h:link>
 
 				<div class="post-summary-footer">
 				    <ul class="post-data-3">    
-					<li><i class="icon-calendar"></i> 09/04/15</li>
-					<li><i class="icon-comment"></i> <a href="#">5 Commentaires</a></li>
-					<li><i class="icon-tags"></i> <a href="#">photoshop</a>, <a href="#">tutorials</a></li>
+					<li><i class="icon-calendar"></i> #{result.lastEditionDate}</li>
+					<li><i class="icon-tags"></i> 
+					    
+					    <p:dataList type="definition" id="skills" var="skill" value="#{userSkillMBean.getUserSkillsByUser(result)}" emptyMessage="-" paginator="false">
+							#{skill.skill.name}, 
+					    </p:dataList>
+					    
+					</li>
 				    </ul>
 				</div>
 			    </article>

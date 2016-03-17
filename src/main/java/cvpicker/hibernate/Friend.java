@@ -19,10 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author DAVID
- */
 @Entity
 @Table(name = "FRIEND")
 @XmlRootElement

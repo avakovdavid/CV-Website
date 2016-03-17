@@ -23,10 +23,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author DAVID
- */
 @Entity
 @Table(name = "ELEMENT")
 @XmlRootElement

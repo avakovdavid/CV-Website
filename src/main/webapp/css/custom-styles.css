@@ -840,3 +840,53 @@ a.accordion-toggle{background: #f5f5f5;}
 #popularProfil .ui-datalist-nobullets {
     margin-left: 0;
 }
+
+.custom-thumbnail {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.custom-thumbnail img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	    transform: translate(-50%,-50%);
+}
+
+.friend-photo {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.friend-photo img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	    transform: translate(-50%,-50%);
+    display: block;
+    margin: 0 auto;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+#searchResult .post-data-3 .ui-datalist {
+    float: right !important;
+}
+
+#searchResult .post-data-3 .ui-datalist dl{
+    margin: 0 !important;
+}
+
+#searchResult .post-data-3 .ui-datalist dl dt{
+    float: left !important;
+    margin-left: 5px;
+}

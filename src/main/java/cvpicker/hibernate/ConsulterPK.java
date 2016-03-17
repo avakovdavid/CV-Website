@@ -11,10 +11,6 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author DAVID
- */
 @Embeddable
 public class ConsulterPK implements Serializable {
     @Basic(optional = false)

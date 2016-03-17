@@ -4,17 +4,31 @@ import cvpicker.hibernate.Cv;
 import cvpicker.hibernate.HibernateUtil;
 import cvpicker.hibernate.Privacy;
 import cvpicker.hibernate.User;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import javax.imageio.stream.FileImageInputStream;
+import javax.servlet.ServletContext;
+import org.apache.commons.io.IOUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -32,6 +46,8 @@ public class UserManagedBean implements Serializable {
     private String email;
     private String password;
     private String passwordRepeat;
+    
+    private StreamedContent photoByUser;
     
     private LoginManagedBean loginBean;
     
@@ -51,7 +67,7 @@ public class UserManagedBean implements Serializable {
 		return ;
 	    }
 	    Cv cv = new Cv();
-	    cv.setTemplate("full_width");
+	    cv.setTemplate("full-width");
 	    
 	    Privacy defaultPrivacy = (Privacy)session.createCriteria(Privacy.class).add(Restrictions.eq("value", "connected_user")).uniqueResult();
 
@@ -95,6 +111,9 @@ public class UserManagedBean implements Serializable {
 	}
     }
     
+    /**
+     * Update user infos
+     */
     public void update(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Transaction tx = null;
@@ -115,13 +134,87 @@ public class UserManagedBean implements Serializable {
 	    session.close();
 	}
     }
+    
+    /**
+     * Get profile photo by user (http request must contain 'userId' parameter)
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+    public StreamedContent getPhotoByUser() throws FileNotFoundException, IOException{
+	FacesContext context = FacesContext.getCurrentInstance();
+	
+	if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        } else {
+            String userId = context.getExternalContext().getRequestParameterMap().get("userId");
+	    	    
+	    User user = getUserById(Integer.parseInt(userId));
+	    
+	    if(user.getPhotoOriginal() == null){
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		String img = servletContext.getRealPath("")+ File.separator 
+		+ "img" + File.separator 
+		+ "gallery" + File.separator 
+		+ "gallery-img-1-4col-cir.jpg";
+		
+		File f = new File(img);
+		FileImageInputStream stream = new FileImageInputStream(f);
+		
+		byte[] b = IOUtils.toByteArray(new FileInputStream(f));
+		
+		return new DefaultStreamedContent(new ByteArrayInputStream(b), "image/png");
+	    }
+	    
+	    InputStream is = new ByteArrayInputStream(user.getPhotoOriginal());
+
+	    return new DefaultStreamedContent(is, "image/png");
+	}
+    }
+    
+    /**
+     * Method to upload profile photo 
+     * @param event File Upload Event
+     * @throws IOException 
+     */
+    public void upload(FileUploadEvent event) throws IOException {
+	UploadedFile uploadedFile = event.getFile();
+	byte [] uploadedFileIS = uploadedFile.getContents();	
+	
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	Transaction tx = null;
+	try {
+	    tx = session.beginTransaction();
+	    loginBean.getCurrentUser().setPhotoOriginal(uploadedFileIS);
+	    session.update(loginBean.getCurrentUser());
+	    tx.commit();
+	    //photoByUser.setBytes(loginBean.getCurrentUser().getPhotoOriginal());
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre photo a bien été chargée.", ""));
+	} catch (Exception e) {
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Un problème est survenu sur le serveur. Veuillez réessayer ultérieurement.", ""));
+
+	    if (tx != null) {
+		tx.rollback();
+	    }
+	} finally {
+	    session.close();
+	}
+    }
  
+    /**
+     * Method to get all users
+     * @return 
+     */
     public List<User> getUsers() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	List<User>  userList = session.createCriteria(User.class).list();
 	return userList;
     }
     
+    /**
+     * Method to get list of users sorted by their popularity (number of cv views)
+     * @return 
+     */
     public List<User> getPopularUsers(){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	Criteria criteria = session.createCriteria(User.class).createCriteria("cv");
@@ -132,6 +225,11 @@ public class UserManagedBean implements Serializable {
 	return userList;
     }
     
+    /**
+     * Method to get user by id
+     * @param id id of the user to retrive 
+     * @return 
+     */
     public User getUserById(int id){
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	User user = (User) session.createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
@@ -217,10 +315,19 @@ public class UserManagedBean implements Serializable {
 	this.email = email;
     }
  
+    /**
+     * Get user password
+     * 
+     * @return user password
+     */
     public String getPassword() {
 	return password;
     }
 
+    /**
+     * Set user password
+     * @param password new user password 
+     */
     public void setPassword(String password) {
 	this.password = password;
     }

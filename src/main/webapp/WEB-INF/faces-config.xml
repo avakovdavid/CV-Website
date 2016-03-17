@@ -44,15 +44,6 @@
 	</managed-property>
     </managed-bean>
     <managed-bean>
-	<managed-bean-name>cropperMBean</managed-bean-name>
-	<managed-bean-class>cvpicker.managed.bean.CropperManagedBean</managed-bean-class>
-	<managed-bean-scope>session</managed-bean-scope>
-	<managed-property>
-	    <property-name>loginBean</property-name>
-	    <value>#{loginMBean}</value>
-	</managed-property>
-    </managed-bean>
-    <managed-bean>
 	<managed-bean-name>friendMBean</managed-bean-name>
 	<managed-bean-class>cvpicker.managed.bean.FriendManagedBean</managed-bean-class>
 	<managed-bean-scope>session</managed-bean-scope>

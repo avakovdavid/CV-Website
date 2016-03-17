@@ -19,7 +19,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-
+/**
+ * Login Managed Bean 
+ * Manage log in / log out users. It save the current connected user instance
+ */
 public class LoginManagedBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
